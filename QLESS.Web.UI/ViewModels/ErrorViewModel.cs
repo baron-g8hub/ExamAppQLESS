@@ -1,4 +1,4 @@
-namespace QLESS.Web.UI.Models
+namespace QLESS.Web.UI.ViewModels
 {
     public class ErrorViewModel
     {

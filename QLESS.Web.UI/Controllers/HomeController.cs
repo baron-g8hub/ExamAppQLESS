@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using QLESS.Web.UI.Models;
+using QLESS.Web.UI.ViewModels;
 using System.Diagnostics;
 
 namespace QLESS.Web.UI.Controllers
