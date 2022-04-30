@@ -1,9 +1,11 @@
-using Common.Contracts;
+﻿using Common.Contracts;
 using Common.DataAccess;
 using Common.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Microsoft.Extensions.DependencyInjection;
+using QLESS.Web.UI.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection"); ;
@@ -45,6 +47,10 @@ builder.Services.AddControllersWithViews();
 // builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddRazorPages();
+
+builder.Services.AddDbContext<QLESSWebUIContext>(options =>
+
+    options.UseSqlServer(builder.Configuration.GetConnectionString("QLESSWebUIContext") ?? throw new InvalidOperationException("Connection string 'QLESSWebUIContext' not found.")));
 
 
 builder.Services.Configure<IdentityOptions>(options =>

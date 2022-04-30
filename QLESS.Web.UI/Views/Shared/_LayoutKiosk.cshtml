@@ -14,8 +14,6 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/QLESS.Web.UI.styles.css" asp-append-version="true" />
-
-
 </head>
 <body>
     <header style="background-color: midnightblue;">
@@ -30,44 +28,13 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="KioskDashboard" asp-action="Index">KIOSK DASHBOARD</a>
                         </li>
-
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="AdminDashboard" asp-action="Index">ADMIN DASHBOARD</a>
                         </li>
-
-                        @if (SignInManager.IsSignedIn(User))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="" asp-controller="TravelCards" asp-action="Index"><i class="fa-solid fa-credit-card"></i> CARDS</a>
-                            </li>
-
-                            <li class="nav-item dropdown">
-                                <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-gear"></i> SETTINGS</a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li class="nav-item">
-                                        <a class="dropdown-item" asp-area="" asp-controller="Employees" asp-action="Index">
-                                            <i class="fa fa-users"></i> &nbsp; Employees
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
-                                    </li>
-                                    <li>
-                                        @*  <a class="dropdown-item" asp-area="" asp-controller="RoleViews" asp-action="Admin">Admin</a>*@
-                                        <a class="dropdown-item" asp-area="" asp-controller="User" asp-action="Index">AppUsers</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-light" href="~/swagger/index.html"><i class="fa fa-address-card"></i> SwaggerUI</a>
-                            </li>
-                        }
                     </ul>
-                    <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>
