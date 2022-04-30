@@ -1,23 +1,26 @@
-﻿using Common.Contracts;
+using Common.Contracts;
 using Common.DataAccess;
 using Common.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using Microsoft.Extensions.DependencyInjection;
-using QLESS.Web.UI.Data;
 
 var builder = WebApplication.CreateBuilder(args);
-// var connectionString = builder.Configuration.GetConnectionString("ApplicationDbContextConnection"); 
-var defaultConnectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection"); ;
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(connectionString));
+
+builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddRoles<ApplicationRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>();
+
 
 //builder.Services.AddDbContext<ApplicationDbContext>(options =>
 //    options.UseSqlServer(defaultConnectionString));;
-
-
-builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
-          .AddEntityFrameworkStores<ApplicationDbContext>()
-          .AddDefaultTokenProviders();
+//builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
+//          .AddEntityFrameworkStores<ApplicationDbContext>()
+//          .AddDefaultTokenProviders();
 
 // NOTE: Should add here the environment variable to be used in CI/CD
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
@@ -27,8 +30,7 @@ builder.Configuration.AddEnvironmentVariables();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(defaultConnectionString));
+
 
 
 //var connectionString = builder.Configuration.GetConnectionString("ApplicationDbContextConnection");;
@@ -41,14 +43,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 
 // builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-
-
 builder.Services.AddEndpointsApiExplorer();
-
 builder.Services.AddRazorPages();
 
-builder.Services.AddDbContext<QLESSWebUIContext>(options =>
-    options.UseSqlServer(defaultConnectionString ?? throw new InvalidOperationException("Connection string 'QLESSWebUIContext' not found.")));
 
 builder.Services.Configure<IdentityOptions>(options =>
 {

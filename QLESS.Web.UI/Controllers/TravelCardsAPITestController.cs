@@ -10,11 +10,11 @@ namespace QLESS.Web.UI.Controllers
 {
     [Route("[controller]/[action]")]
     [ApiController]
-    public class TravelCardsAPIController : ControllerBase
+    public class TravelCardsAPITestController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public TravelCardsAPIController(IUnitOfWork unitOfWork)
+        public TravelCardsAPITestController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }

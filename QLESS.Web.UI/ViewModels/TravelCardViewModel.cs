@@ -6,10 +6,11 @@ namespace QLESS.Web.UI.ViewModels
     {
         public TravelCardViewModel()
         {
-            TravelCardsList = new List<TravelCards>();
+            Entity = new TravelCard();  
+            EntityList = new List<TravelCard>();
         }
 
-
-        public List<TravelCards> TravelCardsList { get; set; }
+        public TravelCard Entity { get; set; }
+        public List<TravelCard> EntityList { get; set; }
     }
 }
