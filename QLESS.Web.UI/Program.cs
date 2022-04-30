@@ -6,6 +6,13 @@ using Microsoft.EntityFrameworkCore;
 
 
 var builder = WebApplication.CreateBuilder(args);
+//var connectionString = builder.Configuration.GetConnectionString("ApplicationDbContextConnection");;
+
+//builder.Services.AddDbContext<ApplicationDbContext>(options =>
+//    options.UseSqlServer(connectionString));;
+
+//builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+//    .AddEntityFrameworkStores<ApplicationDbContext>();;
 
 // Add services to the container.
 // var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -32,8 +39,8 @@ builder.Services.Configure<IdentityOptions>(options =>
     // Default Password settings.
     options.Password.RequireDigit = true;
     options.Password.RequireLowercase = false;
-    options.Password.RequireNonAlphanumeric = true;
-    options.Password.RequireUppercase = true;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = false;
     options.Password.RequiredLength = 6;
     //  options.Password.RequiredUniqueChars = 0;
     options.SignIn.RequireConfirmedEmail = false;
