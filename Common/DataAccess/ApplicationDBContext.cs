@@ -12,6 +12,10 @@ namespace Common.DataAccess
         public DbSet<GenEmpUID>? GenEmpUIDs { get; set; }
         public DbSet<Employee>? Employees { get; set; }
 
+
+        public DbSet<TravelCard>? TravelCards { get; set; } 
+
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
          : base(options)
         {
@@ -29,8 +33,9 @@ namespace Common.DataAccess
             builder.Entity<GenEmpUID>().Property(p => p.RowVersion).IsRowVersion();
             builder.Entity<GenEmpUID>().Property(p => p.IsActive).HasDefaultValue(0);
             builder.Entity<Employee>().Property(p => p.RowVersion).IsRowVersion();
-            //builder.Entity<GeneratedEmployeeID>().Property(p => p.RecordNumber).ValueGeneratedOnAdd();
-            //builder.Entity<GeneratedEmployeeID>().Property(p => p.RecordNumber).HasDefaultValueSql();
+            builder.Entity<TravelCard>().Property(p => p.RowVersion).IsRowVersion();
+
+
 
             //  builder.Entity<Employee>().HasOne(a => a.GeneratedEmployeeID).WithOne(b => b.Employee).HasForeignKey<GeneratedEmployeeID>(b => b.RecordNumber);
             builder.Entity<GenEmpUID>()
