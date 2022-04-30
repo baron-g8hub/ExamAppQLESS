@@ -1,23 +1,21 @@
 ﻿using Common.DataAccess;
 using Common.Models;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Common.DataAccess
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityRole, string>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
         public DbSet<GenEmpUID>? GenEmpUIDs { get; set; }
         public DbSet<Employee>? Employees { get; set; }
+        public DbSet<TravelCard>? TravelCards { get; set; }
 
-
-        public DbSet<TravelCard>? TravelCards { get; set; } 
 
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-         : base(options)
+            : base(options)
         {
         }
 
@@ -35,15 +33,13 @@ namespace Common.DataAccess
             builder.Entity<Employee>().Property(p => p.RowVersion).IsRowVersion();
             builder.Entity<TravelCard>().Property(p => p.RowVersion).IsRowVersion();
 
-
-
-            //  builder.Entity<Employee>().HasOne(a => a.GeneratedEmployeeID).WithOne(b => b.Employee).HasForeignKey<GeneratedEmployeeID>(b => b.RecordNumber);
+            ////  builder.Entity<Employee>().HasOne(a => a.GeneratedEmployeeID).WithOne(b => b.Employee).HasForeignKey<GeneratedEmployeeID>(b => b.RecordNumber);
             builder.Entity<GenEmpUID>()
                   .HasOne(b => b.Employee)
                   .WithOne(i => i.GenEmpUID)
                   .HasForeignKey<Employee>(b => b.EmployeeUID);
 
-            //  builder.ApplyConfiguration(new ApplicationUserEntityConfiguration());
+            builder.ApplyConfiguration(new ApplicationUserEntityConfiguration());
         }
     }
 }

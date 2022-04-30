@@ -5,7 +5,7 @@ namespace Common.Models
 {
 
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
-    sealed internal class SCCNumberMaskAttribute : ValidationAttribute
+    sealed public class SCCNumberMaskAttribute : ValidationAttribute
     {
         // Internal field to hold the mask value.
         readonly string _mask;
@@ -20,20 +20,24 @@ namespace Common.Models
             _mask = mask;
         }
 
-
-        public override bool IsValid(object value)
+        public override bool IsValid(object? value)
         {
-            var phoneNumber = (string)value;
-            bool result = true;
-            if (this.Mask != null)
+            if (value != null)
             {
-                result = MatchesMask(this.Mask, phoneNumber);
+                string phoneNumber = (string)value;
+                if (this.Mask != null)
+                {
+                    if (phoneNumber != null)
+                    {
+                        return MatchesMask(this.Mask, phoneNumber);
+                    }
+                }
             }
-            return result;
+            return false;
         }
 
         // Checks if the entered phone number matches the mask.
-        internal bool MatchesMask(string mask, string phoneNumber)
+        public bool MatchesMask(string mask, string phoneNumber)
         {
             if (mask.Length != phoneNumber.Trim().Length)
             {

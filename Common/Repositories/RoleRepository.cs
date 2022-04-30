@@ -1,6 +1,6 @@
 ﻿using Common.Contracts;
 using Common.DataAccess;
-using Microsoft.AspNetCore.Identity;
+
 
 namespace Common.Repositories
 {
@@ -13,7 +13,7 @@ namespace Common.Repositories
             _context = context;
         }
 
-        public ICollection<IdentityRole> GetRoles()
+        public ICollection<ApplicationRole> GetRoles()
         {
             return _context.Roles.ToList();
         }

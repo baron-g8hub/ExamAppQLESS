@@ -19,14 +19,18 @@ namespace Common.Repositories
 
         public ApplicationUser GetUser(string id)
         {
-            //if (_context != null)
-            //{
-            //    if (_context.Users.Count() > 0)
-            //    {
-            //        return _context.Users.FirstOrDefault(x => x.Id == id);
-            //    }
-            //}
-            return _context.Users.FirstOrDefault(x => x.Id == id);
+            if (_context != null)
+            {
+                if (_context.Users.Any(x => x.Id == id))
+                {
+                    var user = _context.Users.FirstOrDefault(x => x.Id == id);
+                    if (user != null)
+                    {
+                        return user;
+                    }
+                }
+            }
+            return new ApplicationUser();
         }
 
         public ApplicationUser UpdateUser(ApplicationUser user)

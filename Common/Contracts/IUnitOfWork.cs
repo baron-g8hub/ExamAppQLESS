@@ -5,5 +5,7 @@
         IUserRepository User { get; }
 
         IRoleRepository Role { get; }
+
+        ITravelCardRepository   TravelCard { get; }
     }
 }

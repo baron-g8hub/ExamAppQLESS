@@ -245,9 +245,9 @@ namespace Common.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
 
-            SeedRolesSQL(migrationBuilder);
-            SeedUser(migrationBuilder);
-            SeedUserRoles(migrationBuilder);
+            //SeedRolesSQL(migrationBuilder);
+            //SeedUser(migrationBuilder);
+            //SeedUserRoles(migrationBuilder);
         }
 
         private void SeedRolesSQL(MigrationBuilder migrationBuilder)
