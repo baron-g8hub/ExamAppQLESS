@@ -2,7 +2,7 @@
 
 namespace Common.Contracts
 {
-    public interface IUserRepository
+    public interface IUserRepository : IRepositoryBase<ApplicationUser>
     {
         ICollection<ApplicationUser> GetUsers();
         ApplicationUser GetUser(string id);

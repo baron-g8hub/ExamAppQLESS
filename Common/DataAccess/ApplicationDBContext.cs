@@ -8,11 +8,9 @@ namespace Common.DataAccess
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
-        public DbSet<GenEmpUID>? GenEmpUIDs { get; set; }
-        public DbSet<Employee>? Employees { get; set; }
-        public DbSet<TravelCard>? TravelCards { get; set; }
-
-
+        public DbSet<GenEmpUID> GenEmpUIDs => Set<GenEmpUID>();
+        public DbSet<Employee> Employees => Set<Employee>();
+        public DbSet<TravelCard> TravelCards => Set<TravelCard>();
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

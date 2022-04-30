@@ -3,9 +3,10 @@
     public interface IUnitOfWork
     {
         IUserRepository User { get; }
-
         IRoleRepository Role { get; }
+        ITravelCardRepository TravelCard { get; }
 
-        ITravelCardRepository   TravelCard { get; }
+        Task SaveAsync();
+        Task<int> SaveAsync(CancellationToken ct);
     }
 }

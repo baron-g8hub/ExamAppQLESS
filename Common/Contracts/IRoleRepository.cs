@@ -1,6 +1,6 @@
 ﻿namespace Common.Contracts
 {
-    public interface IRoleRepository
+    public interface IRoleRepository : IRepositoryBase<ApplicationRole>
     {
         ICollection<ApplicationRole> GetRoles();
     }

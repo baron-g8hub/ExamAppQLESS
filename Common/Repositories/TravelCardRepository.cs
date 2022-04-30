@@ -1,39 +1,40 @@
 ﻿using Common.Contracts;
 using Common.DataAccess;
 using Common.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Common.Repositories
 {
-    public class TravelCardRepository : ITravelCardRepository
+    public class TravelCardRepository : RepositoryBase<TravelCard>, ITravelCardRepository
     {
-        private readonly ApplicationDbContext _context;
-
-        public TravelCardRepository(ApplicationDbContext context)
+        public TravelCardRepository(ApplicationDbContext context) : base(context)
         {
-            _context = context;
+
         }
 
-
-        public ICollection<TravelCard> GetTravelCards()
+        public virtual IQueryable<TravelCard> GetAllTravelCards()
         {
-            if (_context != null)
+            return _context.Set<TravelCard>();
+        }
+        public virtual async Task<ICollection<TravelCard>> GetTravelCardsAsync()
+        {
+            try
             {
-                if (_context.TravelCards != null)
-                {
-                    return _context.TravelCards.ToList();
-                }
+                return await _context.Set<TravelCard>().ToListAsync();
             }
-            return new List<TravelCard>();
+            catch (Exception ex)
+            {
+                throw new Exception($"Couldn't retrieve entities: {ex.Message}");
+            }
         }
 
-
-        public TravelCard GetTravelCard(int id)
+        public virtual TravelCard GetTravelCard(int id)
         {
             if (_context != null)
             {
                 if (_context.TravelCards != null)
                 {
-                    var user = _context.TravelCards.FirstOrDefault(x => x.TravelCardID == id);
+                    var user = _context.TravelCards.Find(id);
                     if (user != null)
                     {
                         return user;
@@ -42,21 +43,33 @@ namespace Common.Repositories
             }
             return new TravelCard();
         }
-
-        public void AddTravelCard(TravelCard travelCard)
+        public async Task<TravelCard> GetTravelCardAsync(int id)
         {
-            _context.Add(travelCard);
-            _context.SaveChanges();
+            var result = await _context.TravelCards.FindAsync(id);
+            if (result != null)
+            {
+                return result;
+            }
+            return result!;
         }
 
-        public TravelCard UpdateTravelCard(TravelCard travelCard)
+        public virtual void AddTravelCard(TravelCard travelCard)
+        {
+            _context.TravelCards.Add(travelCard);
+        }
+
+        public virtual async Task AddTravelCardAsync(TravelCard travelCard)
+        {
+            await _context.TravelCards.AddAsync(travelCard);
+        }
+
+        public virtual TravelCard UpdateTravelCard(TravelCard travelCard)
         {
             _context.Update(travelCard);
-            _context.SaveChanges();
             return travelCard;
         }
 
-        public void DeleteTravelCard(int id)
+        public virtual void DeleteTravelCard(int id)
         {
             if (_context != null)
             {
@@ -66,7 +79,6 @@ namespace Common.Repositories
                     if (travelCard != null)
                     {
                         _context.TravelCards.Remove(travelCard);
-                        _context.SaveChanges();
                     }
                 }
             }

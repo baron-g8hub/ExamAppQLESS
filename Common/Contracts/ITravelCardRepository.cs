@@ -7,12 +7,20 @@ using System.Threading.Tasks;
 
 namespace Common.Contracts
 {
-    public interface ITravelCardRepository
+    public interface ITravelCardRepository : IRepositoryBase<TravelCard>
     {
-        ICollection<TravelCard> GetTravelCards();
+        IQueryable<TravelCard> GetAllTravelCards();
+        Task<ICollection<TravelCard>> GetTravelCardsAsync();
+
         TravelCard GetTravelCard(int id);
+        Task<TravelCard> GetTravelCardAsync(int id);
+
         void AddTravelCard(TravelCard travelCard);
+        Task AddTravelCardAsync(TravelCard travelCard);
+
         TravelCard UpdateTravelCard(TravelCard travelCard);
+    
+
         void DeleteTravelCard(int id);
     }
 }

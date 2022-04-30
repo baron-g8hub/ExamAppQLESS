@@ -4,13 +4,12 @@ using Common.DataAccess;
 
 namespace Common.Repositories
 {
-    public class RoleRepository : IRoleRepository
+    public class RoleRepository : RepositoryBase<ApplicationRole>, IRoleRepository
     {
-        private readonly ApplicationDbContext _context;
 
-        public RoleRepository(ApplicationDbContext context)
+        public RoleRepository(ApplicationDbContext context) : base(context)
         {
-            _context = context;
+
         }
 
         public ICollection<ApplicationRole> GetRoles()

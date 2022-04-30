@@ -3,13 +3,11 @@ using Common.DataAccess;
 
 namespace Common.Repositories
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : RepositoryBase<ApplicationUser>, IUserRepository
     {
-        private readonly ApplicationDbContext _context;
-
-        public UserRepository(ApplicationDbContext context)
+        public UserRepository(ApplicationDbContext context) : base(context)
         {
-            _context = context;
+
         }
 
         public ICollection<ApplicationUser> GetUsers()

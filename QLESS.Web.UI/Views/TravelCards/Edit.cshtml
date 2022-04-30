@@ -1,0 +1,75 @@
+﻿@model Common.Models.TravelCard
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>TravelCard</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="TravelCardID" />
+            <div class="form-group">
+                <label asp-for="CardHolder" class="control-label"></label>
+                <input asp-for="CardHolder" class="form-control" />
+                <span asp-validation-for="CardHolder" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LoadBalance" class="control-label"></label>
+                <input asp-for="LoadBalance" class="form-control" />
+                <span asp-validation-for="LoadBalance" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastUsedDate" class="control-label"></label>
+                <input asp-for="LastUsedDate" class="form-control" />
+                <span asp-validation-for="LastUsedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ValidityDate" class="control-label"></label>
+                <input asp-for="ValidityDate" class="form-control" />
+                <span asp-validation-for="ValidityDate" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsPWDCard" /> @Html.DisplayNameFor(model => model.IsPWDCard)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsSeniorCard" /> @Html.DisplayNameFor(model => model.IsSeniorCard)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="SCCNumber" class="control-label"></label>
+                <input asp-for="SCCNumber" class="form-control" />
+                <span asp-validation-for="SCCNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PWDNumber" class="control-label"></label>
+                <input asp-for="PWDNumber" class="form-control" />
+                <span asp-validation-for="PWDNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

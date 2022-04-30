@@ -14,5 +14,15 @@ namespace Common.Repositories
             Role = role;
             TravelCard = travelCard;    
         }
+
+        public Task SaveAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<int> SaveAsync(CancellationToken ct)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

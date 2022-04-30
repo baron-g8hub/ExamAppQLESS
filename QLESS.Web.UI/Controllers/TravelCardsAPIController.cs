@@ -21,9 +21,9 @@ namespace QLESS.Web.UI.Controllers
 
         // GET: api/<TravelCardsAPIController>
         [HttpGet]
-        public IEnumerable<TravelCard> Get()
+        public async Task<IEnumerable<TravelCard>> Get()
         {
-            var list = _unitOfWork.TravelCard.GetTravelCards();
+            var list = await _unitOfWork.TravelCard.GetTravelCardsAsync();
             //return new string[] { "value1", "value2" };
             return list;
         }
