@@ -7,16 +7,17 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DBCoreContext' not found.")));
-
 var assembly = typeof(Program).Assembly.GetName().Name;
-var defaultConnString = builder.Configuration.GetConnectionString("DefaultConnection");
+var connectionString = builder.Configuration.GetConnectionString("ApplicationDbContextConnection");
 
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(connectionString));
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddRoles<ApplicationRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
+
 
 // NOTE: Should add here the environment variable to be used in CI/CD
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
@@ -24,7 +25,6 @@ builder.Configuration.AddJsonFile($"appsettings.Dev.json", optional: true);
 builder.Configuration.AddEnvironmentVariables();
 
 // Add services to the container.
-
 builder.Services.AddTransient<ITransportCardRepository, TransportCardRepos>();
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 builder.Services.AddControllersWithViews();
@@ -130,6 +130,6 @@ void AddScoped()
 {
     builder.Services.AddScoped<IUserRepository, UserRepository>();
     builder.Services.AddScoped<IRoleRepository, RoleRepository>();
-    //builder.Services.AddScoped<ITransportCardRepository, TransportCardRepos>();
+    builder.Services.AddScoped<ITransportCardRepository, TransportCardRepos>();
     builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 }

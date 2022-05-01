@@ -135,7 +135,7 @@ namespace QLESS.Web.UI.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var rAWSMARTCARD = await _context.RAWSMARTCARDs.FindAsync(id);
-            _context.RAWSMARTCARDs.Remove(rAWSMARTCARD);
+            _context.RAWSMARTCARDs.Remove(rAWSMARTCARD!);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Common.Models
 {
-    public class TravelCardTransactions
+    public class CardTransaction
     {
         [Key]
         [Column("TransactionID")]

@@ -5,7 +5,7 @@ VisualStudioVersion = 17.1.32414.318
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QLESS.Web.UI", "QLESS.Web.UI\QLESS.Web.UI.csproj", "{4ACDC8D3-4435-41F0-9FF5-35B3C3D7D50F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{C90A7695-3F35-43DD-8401-1851D77E4179}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{C90A7695-3F35-43DD-8401-1851D77E4179}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

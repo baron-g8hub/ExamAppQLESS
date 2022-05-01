@@ -1,0 +1,102 @@
+﻿@model IEnumerable<Common.Models.TransportCard>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TransportCardID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CardHolder)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LoadBalance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastUsedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ValidityDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RowVersion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsPWDCard)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsSeniorCard)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SCCNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PWDNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SmartCardID)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransportCardID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CardHolder)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LoadBalance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastUsedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValidityDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RowVersion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsPWDCard)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsSeniorCard)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SCCNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PWDNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SmartCardID)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

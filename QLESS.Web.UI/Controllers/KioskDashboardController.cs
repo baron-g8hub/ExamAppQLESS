@@ -10,5 +10,7 @@ namespace QLESS.Web.UI.Controllers
         {
             return View();
         }
+
+
     }
 }
