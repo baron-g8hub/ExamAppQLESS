@@ -7,6 +7,7 @@ namespace Common.Repositories
 {
     public class TransportCardRepos : RepositoryBase<TransportCard>, ITransportCardRepository
     {
+
         public TransportCardRepos(ApplicationDbContext context) : base(context)
         {
 

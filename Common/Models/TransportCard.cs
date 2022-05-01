@@ -7,7 +7,11 @@ namespace Common.Models
     public class TransportCard
     {
         [Key]
+        [Column("TransportCardID")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int TransportCardID { get; set; }
+
+
 
         [StringLength(150)]
         public string? CardHolder { get; set; }
@@ -24,27 +28,31 @@ namespace Common.Models
         public DateTime? ValidityDate { get; set; }
 
 
-        public bool IsActive { get; set; } = true;
+        public bool? IsActive { get; set; } = true;
 
         [Timestamp]
         public byte[]? RowVersion { get; set; }
 
-        public bool IsPWDCard { get; set; } = false;
-        public bool IsSeniorCard { get; set; } = false;
+        public bool? IsPWDCard { get; set; } = false;
+        public bool? IsSeniorCard { get; set; } = false;
 
 
         // 10-character length string with “##-####-####” format
+        //[SCCNumberMask("99-9999-9999", ErrorMessage = "{0} value does not match the mask {1}.")]
 
         [Required]
         [StringLength(150)]
-        [SCCNumberMask("99-9999-9999", ErrorMessage = "{0} value does not match the mask {1}.")]
-        public string? SCCNumber { get; set; } 
+        public string? SCCNumber { get; set; }
 
 
         // 12-character length string with “####-####-####” format
 
         [StringLength(150)]
         public string? PWDNumber { get; set; }
+
+
+        public int SmartCardID { get; set; }
+        public RAWSMARTCARD RAWSMARTCARD { get; set; } = null!;
 
     }
 }

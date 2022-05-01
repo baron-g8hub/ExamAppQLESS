@@ -25,5 +25,8 @@ namespace Common.Models
         [ConcurrencyCheck]
         [Timestamp]
         public byte[]? RowVersion { get; set; }
+
+
+        public TransportCard TransportCard { get; set; } = null!;
     }
 }

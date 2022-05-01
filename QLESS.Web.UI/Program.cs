@@ -22,10 +22,8 @@ builder.Configuration.AddEnvironmentVariables();
 
 // Add services to the container.
 
-builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+builder.Services.AddTransient<ITransportCardRepository, TransportCardRepos>();
 builder.Services.AddControllersWithViews();
-
-
 
 
 //var connectionString = builder.Configuration.GetConnectionString("ApplicationDbContextConnection");;
@@ -33,7 +31,6 @@ builder.Services.AddControllersWithViews();
 //    options.UseSqlServer(connectionString));;
 //builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
 //    .AddEntityFrameworkStores<ApplicationDbContext>();;
-
 // var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 
@@ -60,11 +57,11 @@ builder.Services.Configure<IdentityOptions>(options =>
 
 #region Authorization
 
-AddAuthorizationPolicies();
+//AddAuthorizationPolicies();
 
 #endregion
 
-AddScoped();
+//AddScoped();
 
 builder.Services.AddSwaggerGen(options =>
 {
@@ -139,6 +136,6 @@ void AddScoped()
 {
     builder.Services.AddScoped<IUserRepository, UserRepository>();
     builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+    //builder.Services.AddScoped<ITransportCardRepository, TransportCardRepos>();
     builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-    builder.Services.AddScoped<ITransportCardRepository, TransportCardRepos>();
 }

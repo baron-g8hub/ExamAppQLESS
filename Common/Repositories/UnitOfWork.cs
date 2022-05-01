@@ -6,13 +6,13 @@ namespace Common.Repositories
     {
         public IUserRepository User { get; }
         public IRoleRepository Role { get; }
-        public ITransportCardRepository TransportCard { get; }
+      //  public ITransportCardRepository TransportCard { get; }
 
-        public UnitOfWork(IUserRepository user, IRoleRepository role, ITransportCardRepository travelCard)
+        public UnitOfWork(IUserRepository user, IRoleRepository role)
         {
             User = user;
             Role = role;
-            TransportCard = travelCard;    
+           // TransportCard = travelCard;    
         }
 
         public Task SaveAsync()

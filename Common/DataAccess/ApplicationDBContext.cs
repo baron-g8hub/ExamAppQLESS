@@ -10,6 +10,7 @@ namespace Common.DataAccess
     {
         public DbSet<GenEmpUID> GenEmpUIDs => Set<GenEmpUID>();
         public DbSet<Employee> Employees => Set<Employee>();
+
         public DbSet<TransportCard> TransportCards => Set<TransportCard>();
 
         public DbSet<RAWSMARTCARD> RAWSMARTCARDs => Set<RAWSMARTCARD>();
@@ -31,13 +32,21 @@ namespace Common.DataAccess
             builder.Entity<GenEmpUID>().Property(p => p.RowVersion).IsRowVersion();
             builder.Entity<GenEmpUID>().Property(p => p.IsActive).HasDefaultValue(0);
             builder.Entity<Employee>().Property(p => p.RowVersion).IsRowVersion();
+            builder.Entity<RAWSMARTCARD>().Property(p => p.RowVersion).IsRowVersion();
             builder.Entity<TransportCard>().Property(p => p.RowVersion).IsRowVersion();
+
 
             ////  builder.Entity<Employee>().HasOne(a => a.GeneratedEmployeeID).WithOne(b => b.Employee).HasForeignKey<GeneratedEmployeeID>(b => b.RecordNumber);
             builder.Entity<GenEmpUID>()
                   .HasOne(b => b.Employee)
                   .WithOne(i => i.GenEmpUID)
                   .HasForeignKey<Employee>(b => b.EmployeeUID);
+
+            builder.Entity<RAWSMARTCARD>()
+                .HasOne(s => s.TransportCard)
+                .WithOne(ad => ad.RAWSMARTCARD)
+                .HasForeignKey<TransportCard>(s => s.SmartCardID);
+
 
             builder.ApplyConfiguration(new ApplicationUserEntityConfiguration());
         }
