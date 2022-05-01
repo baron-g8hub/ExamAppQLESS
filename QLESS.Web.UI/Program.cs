@@ -6,10 +6,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection"); ;
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DBCoreContext' not found.")));
+
+var assembly = typeof(Program).Assembly.GetName().Name;
+var defaultConnString = builder.Configuration.GetConnectionString("DefaultConnection");
+
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddRoles<ApplicationRole>()
@@ -23,15 +26,8 @@ builder.Configuration.AddEnvironmentVariables();
 // Add services to the container.
 
 builder.Services.AddTransient<ITransportCardRepository, TransportCardRepos>();
+builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 builder.Services.AddControllersWithViews();
-
-
-//var connectionString = builder.Configuration.GetConnectionString("ApplicationDbContextConnection");;
-//builder.Services.AddDbContext<ApplicationDbContext>(options =>
-//    options.UseSqlServer(connectionString));;
-//builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-//    .AddEntityFrameworkStores<ApplicationDbContext>();;
-// var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 
 // builder.Services.AddDatabaseDeveloperPageExceptionFilter();
@@ -56,12 +52,10 @@ builder.Services.Configure<IdentityOptions>(options =>
 
 
 #region Authorization
-
-//AddAuthorizationPolicies();
-
+AddAuthorizationPolicies();
 #endregion
 
-//AddScoped();
+AddScoped();
 
 builder.Services.AddSwaggerGen(options =>
 {

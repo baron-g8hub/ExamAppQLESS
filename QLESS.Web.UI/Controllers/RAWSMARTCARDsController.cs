@@ -1,5 +1,4 @@
-﻿#nullable disable
-using Common.DataAccess;
+﻿using Common.DataAccess;
 using Common.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;

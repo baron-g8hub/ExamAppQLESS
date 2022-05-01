@@ -477,16 +477,16 @@ namespace Common.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Common.Models.GenEmpUID", b =>
-                {
-                    b.Navigation("Employee");
-                });
+            //modelBuilder.Entity("Common.Models.GenEmpUID", b =>
+            //    {
+            //        b.Navigation("Employee");
+            //    });
 
-            modelBuilder.Entity("Common.Models.RAWSMARTCARD", b =>
-                {
-                    b.Navigation("TransportCard")
-                        .IsRequired();
-                });
+            //modelBuilder.Entity("Common.Models.RAWSMARTCARD", b =>
+            //    {
+            //        b.Navigation("TransportCard")
+            //            .IsRequired();
+            //    });
 #pragma warning restore 612, 618
         }
     }
