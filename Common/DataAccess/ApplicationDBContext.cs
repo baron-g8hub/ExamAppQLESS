@@ -12,6 +12,8 @@ namespace Common.DataAccess
         public DbSet<Employee> Employees => Set<Employee>();
         public DbSet<TravelCard> TravelCards => Set<TravelCard>();
 
+        public DbSet<RAWSMARTCARD> RAWSMARTCARDs => Set<RAWSMARTCARD>();
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
