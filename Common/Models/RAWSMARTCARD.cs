@@ -14,12 +14,13 @@ namespace Common.Models
 
         public int? SerialNumber { get; set; }
 
-        public bool IsActive { get; set; }
+        public bool? IsActive { get; set; }
 
-        public DateTime ActivatedDate { get; set; } = DateTime.UtcNow;
+        public DateTime? ActivatedDate { get; set; } = DateTime.UtcNow;
+
         public DateTime? DeactivatedDate { get; set; }
 
-        public bool IsValid { get; set; }
+        public bool? IsValid { get; set; }
 
         [ConcurrencyCheck]
         [Timestamp]

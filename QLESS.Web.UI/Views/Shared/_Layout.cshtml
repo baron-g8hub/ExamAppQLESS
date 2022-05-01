@@ -32,22 +32,21 @@
                     <ul class="navbar-nav flex-grow-1">
 
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="KioskDashboard" asp-action="Index">KIOSK DASHBOARD</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="KioskDashboard" asp-action="Index">KIOSK</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="AdminDashboard" asp-action="Index">ADMIN DASHBOARD</a>
+                            <a class="nav-link text-light" href="~/swagger/index.html"><i class="fa fa-address-card"></i> SwaggerUI</a>
                         </li>
 
                         @if (SignInManager.IsSignedIn(User))
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="" asp-controller="RAWSMARTCARDs" asp-action="Index"><i class="fa-solid fa-credit-card"></i> RAWCARDS</a>
-                            </li>
-
                             <li class="nav-item dropdown">
-                                <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-gear"></i> SETTINGS</a>
+                                <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-gear"></i> MANAGE</a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li class="nav-item">
+                                        <a class="nav-link text-light" asp-area="" asp-controller="RAWSMARTCARDs" asp-action="Index"><i class="fa-solid fa-credit-card"></i> RAWCARDS</a>
+                                    </li>
                                     <li class="nav-item">
                                         <a class="dropdown-item" asp-area="" asp-controller="Employees" asp-action="Index">
                                             <i class="fa fa-users"></i> &nbsp; Employees
@@ -62,9 +61,7 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-light" href="~/swagger/index.html"><i class="fa fa-address-card"></i> SwaggerUI</a>
-                            </li>
+
                         }
                     </ul>
                     <partial name="_LoginPartial" />
@@ -80,11 +77,11 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2022 - QLESS.Web.UI - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2022 - QLESS Transport Exam App by: Baron
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="~/lib/font-awesome/js/all.min.js"></script>
+    <script src="~/lib/font-awesome/js/all.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)

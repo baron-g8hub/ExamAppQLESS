@@ -17,27 +17,25 @@ namespace Common.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SmartCardName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SerialNumber = table.Column<int>(type: "int", nullable: true),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    ActivatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: true),
+                    ActivatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeactivatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsValid = table.Column<bool>(type: "bit", nullable: false),
+                    IsValid = table.Column<bool>(type: "bit", nullable: true),
                     RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_RAWSMARTCARDs", x => x.SmartCardID);
                 });
-
-          
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "RAWSMARTCARDs");
+            //migrationBuilder.DropTable(
+            //    name: "RAWSMARTCARDs");
 
-            migrationBuilder.DropTable(
-                name: "TravelCards");
+            //migrationBuilder.DropTable(
+            //    name: "TravelCards");
         }
     }
 }

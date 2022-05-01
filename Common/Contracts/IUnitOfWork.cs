@@ -4,7 +4,7 @@
     {
         IUserRepository User { get; }
         IRoleRepository Role { get; }
-        ITravelCardRepository TravelCard { get; }
+        ITransportCardRepository TransportCard { get; }
 
         Task SaveAsync();
         Task<int> SaveAsync(CancellationToken ct);

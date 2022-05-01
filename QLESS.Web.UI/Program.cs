@@ -71,7 +71,7 @@ builder.Services.AddSwaggerGen(options =>
     options.SwaggerDoc("v1", new OpenApiInfo
     {
         Version = "v1",
-        Title = "Q-LESS Transport .NetCore6 API by: BaronLugtu",
+        Title = "Q-LESS Transport .NetCore6 Web and API test app by: Ron",
         Description = "Web app, and Api with Swagger UI.",
         //TermsOfService = new Uri("https://example.com/terms"),
         //Contact = new OpenApiContact
@@ -140,5 +140,5 @@ void AddScoped()
     builder.Services.AddScoped<IUserRepository, UserRepository>();
     builder.Services.AddScoped<IRoleRepository, RoleRepository>();
     builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-    builder.Services.AddScoped<ITravelCardRepository, TravelCardRepository>();
+    builder.Services.AddScoped<ITransportCardRepository, TransportCardRepos>();
 }

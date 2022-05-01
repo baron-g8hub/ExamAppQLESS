@@ -4,10 +4,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Common.Models
 {
-    public class TravelCard
+    public class TransportCard
     {
         [Key]
-        public int TravelCardID { get; set; }
+        public int TransportCardID { get; set; }
 
         [StringLength(150)]
         public string? CardHolder { get; set; }
