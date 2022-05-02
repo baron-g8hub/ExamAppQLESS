@@ -4,6 +4,7 @@ using Common.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Common.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220501210114_UpdateTransportCards")]
+    partial class UpdateTransportCards
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -121,44 +123,6 @@ namespace Common.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-                });
-
-            modelBuilder.Entity("Common.Models.CardTransaction", b =>
-                {
-                    b.Property<Guid>("CardTransactionID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("CardTransactionID");
-
-                    b.Property<decimal?>("AmountChange")
-                        .HasColumnType("smallmoney");
-
-                    b.Property<decimal?>("AmountDiscounted")
-                        .HasColumnType("smallmoney");
-
-                    b.Property<decimal?>("AmountReceived")
-                        .HasColumnType("smallmoney");
-
-                    b.Property<decimal?>("AmountTotal")
-                        .HasColumnType("smallmoney");
-
-                    b.Property<double?>("DiscountPercentage")
-                        .HasColumnType("float");
-
-                    b.Property<DateTime>("PostingDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("rowversion");
-
-                    b.Property<int>("TransportCardID")
-                        .HasColumnType("int");
-
-                    b.HasKey("CardTransactionID");
-
-                    b.ToTable("CardTransactions");
                 });
 
             modelBuilder.Entity("Common.Models.Employee", b =>

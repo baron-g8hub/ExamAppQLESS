@@ -17,3 +17,17 @@ body {
     margin-bottom: 60px;
     background-color: #eff0f5;
 }
+
+.button_theme_orange {
+    border: 1px solid #f57224;
+    background: #f57224;
+    color: ghostwhite;
+}
+
+    .button_theme_orange:hover {
+        color: #ffff;
+    }
+
+.panel_border {
+    border: 2px solid midnightblue !important;
+}

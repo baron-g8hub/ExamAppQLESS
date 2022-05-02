@@ -3,17 +3,22 @@ using Common.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Common.DataAccess
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
         public DbSet<GenEmpUID> GenEmpUIDs => Set<GenEmpUID>();
+
         public DbSet<Employee> Employees => Set<Employee>();
+
+        public DbSet<RAWSMARTCARD> RAWSMARTCARDs => Set<RAWSMARTCARD>();
 
         public DbSet<TransportCard> TransportCards => Set<TransportCard>();
 
-        public DbSet<RAWSMARTCARD> RAWSMARTCARDs => Set<RAWSMARTCARD>();
+        public DbSet<CardTransaction> CardTransactions => Set<CardTransaction>();
+
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -23,6 +28,7 @@ namespace Common.DataAccess
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            var converter = new BoolToZeroOneConverter<int>();
             base.OnModelCreating(builder);
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
@@ -33,8 +39,9 @@ namespace Common.DataAccess
             builder.Entity<GenEmpUID>().Property(p => p.IsActive).HasDefaultValue(0);
             builder.Entity<Employee>().Property(p => p.RowVersion).IsRowVersion();
             builder.Entity<RAWSMARTCARD>().Property(p => p.RowVersion).IsRowVersion();
+          //  builder.Entity<RAWSMARTCARD>().Property(e => e.IsActive).HasConversion(converter);
             builder.Entity<TransportCard>().Property(p => p.RowVersion).IsRowVersion();
-
+            builder.Entity<CardTransaction>().Property(p => p.RowVersion).IsRowVersion();
 
             ////  builder.Entity<Employee>().HasOne(a => a.GeneratedEmployeeID).WithOne(b => b.Employee).HasForeignKey<GeneratedEmployeeID>(b => b.RecordNumber);
             builder.Entity<GenEmpUID>()
@@ -43,10 +50,8 @@ namespace Common.DataAccess
                   .HasForeignKey<Employee>(b => b.EmployeeUID);
 
             builder.Entity<RAWSMARTCARD>()
-                .HasOne(s => s.TransportCard)
-                .WithOne(ad => ad.RAWSMARTCARD)
-                .HasForeignKey<TransportCard>(s => s.SmartCardID);
-
+                  .HasMany(c => c.TransportCards)
+                  .WithOne(e => e.RAWSMARTCARD);
 
             builder.ApplyConfiguration(new ApplicationUserEntityConfiguration());
         }

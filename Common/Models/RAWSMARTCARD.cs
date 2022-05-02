@@ -27,6 +27,18 @@ namespace Common.Models
         public byte[]? RowVersion { get; set; }
 
 
-        public TransportCard TransportCard { get; set; } = null!;
+        public ICollection<TransportCard>? TransportCards { get; set; }
+
+
+        //[NotMapped]
+        //public bool MyColumnBool
+        //{
+        //    get
+        //    {
+        //        return (IsActive == 1);
+        //    }
+        //}
+
+        //public int MyColumn { get; set; }
     }
 }
