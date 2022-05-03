@@ -57,7 +57,18 @@ namespace QLESS.Web.UI.Controllers
             {
                 vm.Entity = entity;
                 vm.Entity.LoadBalance = listTransactions.Sum(x => x.AmountTotal);
-                vm.TransportCardTripsList = trips.FindAll(x => x.TransportCard?.TransportCardID == id);
+                foreach (var item in trips.FindAll(x => x.TransportCard?.TransportCardID == id))
+                {
+                    var trans = listTransactions.FirstOrDefault(x => x.TransportCardTrip?.TransportCardTripID == item.TransportCardTripID);
+                    if (trans != null)
+                    {
+                        item.CurrentBalance = trans.AmountReceived;
+                        item.DiscountPercentage = trans.DiscountPercentage;
+                        item.AmountDiscounted = trans.AmountDiscounted;
+                        item.RunningBalance = trans.AmountChange;
+                    }
+                    vm.TransportCardTripsList.Add(item);
+                }
             }
             return View(vm);
         }
@@ -93,6 +104,7 @@ namespace QLESS.Web.UI.Controllers
 
                         var transaction = new CardTransaction
                         {
+                            TransportCardTrip = cardTrip,
                             TransportCard = await _context.TransportCards.FindAsync(id),
                             PostingDate = DateTime.Now,
                             AmountTotal = -15,

@@ -17,14 +17,13 @@ namespace Common.Models
         [Column(TypeName = "smallmoney")]
         public decimal? LoadBalance { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy | h: mm tt}")]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy h:mm tt}")]
         [Column(TypeName = "datetime")]
         public DateTime? LastUsedDate { get; set; } = DateTime.UtcNow;
 
-        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy | h: mm tt}")]
+    
         [Column(TypeName = "datetime")]
-        public DateTime? ValidityDate { get; set; }
-
+        public DateTime? ValidityDate { get; set; } 
 
         public bool? IsActive { get; set; } = true;
 

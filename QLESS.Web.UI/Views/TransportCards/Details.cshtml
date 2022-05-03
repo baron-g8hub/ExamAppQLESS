@@ -6,20 +6,16 @@
 }
 
 <ul class="list-group list-group-horizontal">
-    <li class="list-group-item"><h4> @Model.Entity.RAWSMARTCARD.SmartCardName </h4></li>
-    <li class="list-group-item"> Load:  @Html.DisplayFor(model => model.Entity.LoadBalance)</li>
-    <li class="list-group-item"> LastUsed:  @Html.DisplayFor(model => model.CardTransaction.PostingDate)</li>
-    <li class="list-group-item"> LastTrip: @Model.TrainStation.TrainStationCode</li>
+    <li class="list-group-item"><h4>@Model.Entity.RAWSMARTCARD.SmartCardName </h4></li>
+    <li class="list-group-item"><p class="text_theme_orange">@Html.DisplayFor(model => model.Entity.LoadBalance)</p></li>
+    <li class="list-group-item">LastUsed:  @Html.DisplayFor(model => model.CardTransaction.PostingDate)</li>
     <li class="list-group-item">
         <form asp-route-id="@Model.Entity.TransportCardID" method="post">
-            <a class="btn btn-outline-primary asp-controller="TransportCards" asp-action="AddTrip" asp-route-id="@Model.Entity.TransportCardID">
-                <i class="fas fa-info-circle"></i>ADD TRIP SAME DAY
-            </a>
+            <a class="btn btn-sm btn-outline-primary asp-controller="TransportCards" asp-action="AddTrip" asp-route-id="@Model.Entity.TransportCardID">ADD TRIP SAME DAY</a>
         </form>
     </li>
 </ul>
 <hr />
-
 
 <div class="row">
     <div class="col-md-12">
@@ -31,16 +27,25 @@
         <thead>
             <tr>
                 <th>
-                    Trip Date
-                </th>
-                <th style="text-align: right; font-family:monospace;">
-                    Charged
+                    Date
                 </th>
                 <th>
                     Origin
                 </th>
                 <th>
                     Destination
+                </th>
+                <th style="text-align: right; font-family:monospace;">
+                    Load
+                </th>
+                <th style="text-align: right; font-family:monospace;">
+                    Charge
+                </th>
+                <th style="text-align: right; font-family:monospace;">
+                    Discount
+                </th>
+                <th style="text-align: right; font-family:monospace;">
+                    Remaining
                 </th>
                 <th></th>
             </tr>
@@ -53,13 +58,22 @@
                         @Html.DisplayFor(modelItem => item.TransportCardTripDate)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.AmountTripCharge)
-                    </td>
-                    <td>
                         @Html.DisplayFor(modelItem => item.OriginStationCode)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.DestinationStationCode)
+                    </td>
+                    <td class="text_theme_orange" scope="row" style="text-align: right; font-family:monospace;">
+                        @Html.DisplayFor(modelItem => item.CurrentBalance)
+                    </td>
+                    <td class="text_theme_orange" scope="row" style="text-align: right; font-family:monospace;">
+                        @Html.DisplayFor(modelItem => item.AmountTripCharge)
+                    </td>
+                    <td class="text_theme_orange" scope="row" style="text-align: right; font-family:monospace;">
+                        @Html.DisplayFor(modelItem => item.AmountDiscounted)
+                    </td>
+                    <td class="text_theme_orange" scope="row" style="text-align: right; font-family:monospace;">
+                        @Html.DisplayFor(modelItem => item.RunningBalance)
                     </td>
                     <td>
                     </td>

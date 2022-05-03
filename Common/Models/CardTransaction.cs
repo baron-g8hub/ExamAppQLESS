@@ -15,7 +15,7 @@ namespace Common.Models
         [Column("CardTransactionID")]
         public Guid CardTransactionID { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy | h: mm tt}")]
+        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy h:mm tt}")]
         [Column(TypeName = "datetime")]
         public DateTime PostingDate { get; set; }
 
@@ -37,5 +37,7 @@ namespace Common.Models
         public byte[]? RowVersion { get; set; }
 
         public TransportCard? TransportCard { get; set; }
+
+        public TransportCardTrip? TransportCardTrip { get; set; }
     }
 }

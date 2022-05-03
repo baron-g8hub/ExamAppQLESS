@@ -12,19 +12,28 @@ namespace Common.Models
         [Column(TypeName = "datetime")]
         public DateTime TransportCardTripDate { get; set; } = DateTime.UtcNow;
 
-        [DataType(DataType.Currency)]
+
         [Column(TypeName = "smallmoney")]
         public decimal? AmountTripCharge { get; set; }
 
         public string? TransportCardTripOperatorCode { get; set; }
-    
+
         public string? OriginStationCode { get; set; }
-    
+
         public string? DestinationStationCode { get; set; }
 
         public bool HasGateIN { get; set; } = false;
 
         public bool HasGateOUT { get; set; } = false;
+
+        [NotMapped]
+        public decimal? CurrentBalance { get; set; }
+        [NotMapped]
+        public double? DiscountPercentage { get; set; }
+        [NotMapped]
+        public decimal? AmountDiscounted { get; set; }
+        [NotMapped]
+        public decimal? RunningBalance { get; set; }
 
         [ConcurrencyCheck]
         [Timestamp]
