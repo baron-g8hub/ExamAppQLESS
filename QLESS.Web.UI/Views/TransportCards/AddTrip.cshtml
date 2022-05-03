@@ -1,0 +1,72 @@
+﻿@model QLESS.Web.UI.ViewModels.TransportCardViewModel
+
+@{
+    ViewData["Title"] = "AddTrip";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4>ADD NEW TRIP</h4>
+<ul class="list-group list-group-horizontal">
+    <li class="list-group-item"><h4>@Model.Entity.RAWSMARTCARD.SmartCardName </h4></li>
+    <li class="list-group-item"> Load:  @Html.DisplayFor(model => model.Entity.LoadBalance)</li>
+    <li class="list-group-item"> LastUsed:  @Html.DisplayFor(model => model.CardTransaction.PostingDate)</li>
+    <li class="list-group-item"> LastTrip: @Model.TrainStation.TrainStationCode</li>
+</ul>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddTrip">
+            <input type="hidden" asp-for="@Model.Entity.TransportCardID" />
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="TravelDate" class="control-label"></label>
+                <input asp-for="TravelDate" class="form-control" readonly />
+                <span asp-validation-for="TravelDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Rate" class="control-label"></label>
+                <input type="number" asp-for="@Model.Rate" placeholder="0.00" class="form-control" name="Rate" style="font-family: monospace;" />
+                <span asp-validation-for="@Model.Rate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Trip.TransportCardTripOperatorCode" class="control-label"></label>
+                <input asp-for="Trip.TransportCardTripOperatorCode" class="form-control" />
+                <span asp-validation-for="Trip.TransportCardTripOperatorCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Trip.OriginStationCode" class="control-label"></label>
+                <select asp-for="Trip.OriginStationCode" class="form-control" asp-items="@Model.OriginList"></select>
+                <span asp-validation-for="Trip.OriginStationCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Trip.DestinationStationCode" class="control-label"></label>
+                <select asp-for="Trip.DestinationStationCode" class="form-control" asp-items="@Model.DestinationList"></select>
+                <span asp-validation-for="Trip.DestinationStationCode" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Trip.HasGateIN" /> @Html.DisplayNameFor(model => model.Trip.HasGateIN)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Trip.HasGateOUT" /> @Html.DisplayNameFor(model => model.Trip.HasGateOUT)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="SUBMIT" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}

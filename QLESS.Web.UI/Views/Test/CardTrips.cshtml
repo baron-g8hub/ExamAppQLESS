@@ -1,0 +1,86 @@
+﻿@model IEnumerable<Common.Models.TransportCardTrip>
+
+@{
+    ViewData["Title"] = "CardTrips";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>CardTrips</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TransportCardTripID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TransportCardTripDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AmountTripCharge)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TransportCardTripOperatorCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OriginStationCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DestinationStationCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HasGateIN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HasGateOUT)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RowVersion)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TransportCardTripID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TransportCardTripDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AmountTripCharge)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TransportCardTripOperatorCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OriginStationCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DestinationStationCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HasGateIN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HasGateOUT)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RowVersion)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -51,7 +51,6 @@ namespace Common.Models
         public RAWSMARTCARD RAWSMARTCARD { get; set; } = null!;
 
         public ICollection<CardTransaction>? CardTransactions { get; set; }
-
-        public ICollection<TransportCardTrip>? transportCardTrips { get; set; }
+        public ICollection<TransportCardTrip>? TransportCardTrips { get; set; }
     }
 }

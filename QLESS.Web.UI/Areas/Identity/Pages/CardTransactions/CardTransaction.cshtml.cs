@@ -104,13 +104,19 @@ namespace QLESS.Web.UI
                         transportCard.PWDNumber = string.Empty;
                         // Insert into TransportCards table
                         await _context.TransportCards.AddAsync(transportCard);
+                        var change =  Input.AmountTotal - Input.AmountReceived;
+                        var transaction = new CardTransaction
+                        {
+                            TransportCard = transportCard,
+                            PostingDate = DateTime.Now,
+                            AmountTotal = Input.AmountReceived,
+                            AmountReceived = Input.AmountReceived,  
+                            DiscountPercentage = 0,
+                            AmountDiscounted = 0,
+                            AmountChange = change,    
+                        };
 
-                        var transaction = new CardTransaction();
-                        transaction.TransportCardID = transportCard.RAWSMARTCARD.SmartCardID;
-                        transaction.PostingDate = DateTime.UtcNow;
-                        transaction.AmountTotal = transaction.AmountReceived;
                         await _context.CardTransactions.AddAsync(transaction);
-
                         smartCard.IsActive = true;
                         _context.RAWSMARTCARDs.Update(smartCard);
                         // TODO: To use context transactional approach here.

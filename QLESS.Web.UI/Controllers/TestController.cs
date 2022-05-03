@@ -8,6 +8,7 @@ namespace QLESS.Web.UI.Controllers
     public class TestController : Controller
     {
         ITransportCardRepository _context;
+        
 
         public TestController(ITransportCardRepository context)
         {
@@ -20,6 +21,15 @@ namespace QLESS.Web.UI.Controllers
             var lists = new List<TransportCard>();
             var list = await _context.GetTransportCardsAsync();
             return View(list);
+        }
+
+
+        // GET: TestController
+        public ActionResult CardTrips()
+        {
+            var lists = new List<TransportCardTrip>();
+
+            return View(lists);
         }
 
         // GET: TestController/Details/5

@@ -12,6 +12,7 @@ namespace Common.Models
         [Column(TypeName = "datetime")]
         public DateTime TransportCardTripDate { get; set; } = DateTime.UtcNow;
 
+        [DataType(DataType.Currency)]
         [Column(TypeName = "smallmoney")]
         public decimal? AmountTripCharge { get; set; }
 
@@ -29,7 +30,7 @@ namespace Common.Models
         [Timestamp]
         public byte[]? RowVersion { get; set; }
 
-        
+        public TransportCard? TransportCard { get; set; }
 
         public ICollection<TrainStation>? TrainStations { get; set; }
     }
