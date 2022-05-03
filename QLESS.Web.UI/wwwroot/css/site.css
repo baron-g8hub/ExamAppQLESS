@@ -15,7 +15,7 @@ html {
 
 body {
     margin-bottom: 60px;
-    background-color: #eff0f5;
+    background-color: #f7f7f1d9;
 }
 
 .button_theme_orange {
@@ -30,4 +30,9 @@ body {
 
 .panel_border {
     border: 2px solid midnightblue !important;
+}
+
+.text_theme_orange {
+    font-weight: bold;
+    color: #f57224;
 }

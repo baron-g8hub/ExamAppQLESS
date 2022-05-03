@@ -11,8 +11,6 @@ namespace Common.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int TransportCardID { get; set; }
 
-        
-
         [StringLength(150)]
         public string? CardHolder { get; set; }
 
@@ -49,9 +47,11 @@ namespace Common.Models
 
         [StringLength(150)]
         public string? PWDNumber { get; set; }
-
         
         public RAWSMARTCARD RAWSMARTCARD { get; set; } = null!;
 
+        public ICollection<CardTransaction>? CardTransactions { get; set; }
+
+        public ICollection<TransportCardTrip>? transportCardTrips { get; set; }
     }
 }

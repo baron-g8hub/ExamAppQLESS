@@ -11,10 +11,9 @@ namespace Common.Models
     public class CardTransaction
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("CardTransactionID")]
         public Guid CardTransactionID { get; set; }
-
-        public int TransportCardID { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:dd MMM yyyy | h: mm tt}")]
         [Column(TypeName = "datetime")]
@@ -37,5 +36,6 @@ namespace Common.Models
         [Timestamp]
         public byte[]? RowVersion { get; set; }
 
+        public int TransportCardID { get; set; }
     }
 }

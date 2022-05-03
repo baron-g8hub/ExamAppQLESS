@@ -1,0 +1,78 @@
+﻿@model QLESS.Web.UI.ViewModels.TransportCardViewModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<ul class="list-group list-group-horizontal">
+    <li class="list-group-item"><h4> @Model.Entity.RAWSMARTCARD.SmartCardName </h4></li>
+    <li class="list-group-item"> Load:  @Html.DisplayFor(model => model.Entity.LoadBalance)</li>
+    <li class="list-group-item"> LastUsed:  @Html.DisplayFor(model => model.CardTransaction.PostingDate)</li>
+    <li class="list-group-item"> LastTrip: @Model.TrainStation.TrainStationCode</li>
+</ul>
+<hr />
+
+
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Details">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="table-responsive border border-dark">
+    <table class="table align-middle table-sm">
+        <thead>
+            <tr>
+                <th>
+                    ID
+                </th>
+                <th>
+                    SmartCard
+                </th>
+
+                <th>
+                    Used
+                </th>
+                <th>
+                    Valid
+                </th>
+                <th>
+                    Status
+                </th>
+                <th>
+                    SSCC
+                </th>
+                <th>
+                    PWDN
+                </th>
+                <th style="text-align: right; font-family:monospace;">
+                    Load
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.TransportCardTripsList)
+            {
+
+            }
+        </tbody>
+    </table>
+</div>
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}

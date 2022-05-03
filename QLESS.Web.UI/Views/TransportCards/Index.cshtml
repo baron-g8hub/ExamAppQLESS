@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Common.Models.TransportCard>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4>Transport Cards</h4>
+<div class="table-responsive border border-dark">
+    <table class="table align-middle table-sm">
+        <thead>
+            <tr>
+                <th>
+                    ID
+                </th>
+                <th>
+                    SmartCard
+                </th>
+
+                <th>
+                    Used
+                </th>
+                <th>
+                    Valid
+                </th>
+                <th>
+                    Status
+                </th>
+                <th>
+                    SSCC
+                </th>
+                <th>
+                    PWDN
+                </th>
+                <th style="text-align: right; font-family:monospace;">
+                    Load
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                if (item.LastUsedDate != null)
+                {
+                    item.ValidityDate = item.LastUsedDate.Value.AddYears(5);
+                }
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TransportCardID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RAWSMARTCARD.SmartCardName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastUsedDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ValidityDate)
+                    </td>
+                    <td>
+                        @if (item.IsActive == true)
+                        {
+                          <span class="badge rounded-pill bg-success">Active</span>
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SCCNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PWDNumber)
+                    </td>
+                    <td class="text_theme_orange" scope="row" style="text-align: right; font-family:monospace;">
+                        @Html.DisplayFor(modelItem => item.LoadBalance)
+                    </td>
+                    <td>
+                      <form asp-route-id="@item.TransportCardID" method="post">
+                            <a class="btn btn-sm btn-outline-success asp-controller="TransportCards" asp-action="Details" asp-route-id="@item.TransportCardID">
+                                <i class="fas fa-info-circle"></i>
+                            </a>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

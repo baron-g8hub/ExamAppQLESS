@@ -9,16 +9,14 @@ namespace Common.DataAccess
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
-        public DbSet<GenEmpUID> GenEmpUIDs => Set<GenEmpUID>();
-
-        public DbSet<Employee> Employees => Set<Employee>();
-
         public DbSet<RAWSMARTCARD> RAWSMARTCARDs => Set<RAWSMARTCARD>();
-
+        public DbSet<TrainStation> TrainStations => Set<TrainStation>();
+        public DbSet<TransportCardTrip> TransportCardTrips => Set<TransportCardTrip>();
         public DbSet<TransportCard> TransportCards => Set<TransportCard>();
-
         public DbSet<CardTransaction> CardTransactions => Set<CardTransaction>();
 
+        public DbSet<GenEmpUID> GenEmpUIDs => Set<GenEmpUID>();
+        public DbSet<Employee> Employees => Set<Employee>();
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -33,17 +31,27 @@ namespace Common.DataAccess
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
+            //  builder.Entity<RAWSMARTCARD>().Property(e => e.IsActive).HasConversion(converter);
+
 
             builder.Entity<GenEmpUID>().Property(p => p.GeneratedID).UseIdentityColumn(1001, 1);
             builder.Entity<GenEmpUID>().Property(p => p.RowVersion).IsRowVersion();
             builder.Entity<GenEmpUID>().Property(p => p.IsActive).HasDefaultValue(0);
             builder.Entity<Employee>().Property(p => p.RowVersion).IsRowVersion();
             builder.Entity<RAWSMARTCARD>().Property(p => p.RowVersion).IsRowVersion();
-          //  builder.Entity<RAWSMARTCARD>().Property(e => e.IsActive).HasConversion(converter);
             builder.Entity<TransportCard>().Property(p => p.RowVersion).IsRowVersion();
-            builder.Entity<CardTransaction>().Property(p => p.RowVersion).IsRowVersion();
 
-            ////  builder.Entity<Employee>().HasOne(a => a.GeneratedEmployeeID).WithOne(b => b.Employee).HasForeignKey<GeneratedEmployeeID>(b => b.RecordNumber);
+            builder.Entity<TrainStation>().Property(p => p.RowVersion).IsRowVersion();
+            builder.Entity<TrainStation>().Property(b => b.TrainStationID).ValueGeneratedOnAdd();
+
+            builder.Entity<CardTransaction>().Property(p => p.RowVersion).IsRowVersion();
+            builder.Entity<TransportCardTrip>().Property(p => p.RowVersion).IsRowVersion();
+
+
+            //builder.Entity<TrainStation>().HasOne(p => p.TransportCardTrip).WithOne(b => b.TrainStationFrom);
+            //builder.Entity<TrainStation>().HasOne(p => p.TransportCardTrip).WithOne(b => b.TrainStationTo);
+
+
             builder.Entity<GenEmpUID>()
                   .HasOne(b => b.Employee)
                   .WithOne(i => i.GenEmpUID)
@@ -52,6 +60,106 @@ namespace Common.DataAccess
             builder.Entity<RAWSMARTCARD>()
                   .HasMany(c => c.TransportCards)
                   .WithOne(e => e.RAWSMARTCARD);
+
+            builder.Entity<TrainStation>().HasData(new TrainStation
+            {
+                TrainStationID = Guid.NewGuid(),
+                TrainStationCode = "ST1",
+                TrainStationNumber = 1,
+                IsActive = true,
+                CreatedBy = "ADMIN",
+                UpdatedBy = "ADMIN"
+            });
+
+            builder.Entity<TrainStation>().HasData(new TrainStation
+            {
+                TrainStationID = Guid.NewGuid(),
+                TrainStationCode = "ST2",
+                TrainStationNumber = 2,
+                IsActive = true,
+                CreatedBy = "ADMIN",
+                UpdatedBy = "ADMIN"
+            });
+
+            builder.Entity<TrainStation>().HasData(new TrainStation
+            {
+                TrainStationID = Guid.NewGuid(),
+                TrainStationCode = "ST3",
+                TrainStationNumber = 3,
+                IsActive = true,
+                CreatedBy = "ADMIN",
+                UpdatedBy = "ADMIN"
+            });
+
+            builder.Entity<TrainStation>().HasData(new TrainStation
+            {
+                TrainStationID = Guid.NewGuid(),
+                TrainStationCode = "ST4",
+                TrainStationNumber = 4,
+                IsActive = true,
+                CreatedBy = "ADMIN",
+                UpdatedBy = "ADMIN"
+            });
+
+            builder.Entity<TrainStation>().HasData(new TrainStation
+            {
+                TrainStationID = Guid.NewGuid(),
+                TrainStationCode = "ST5",
+                TrainStationNumber = 5,
+                IsActive = true,
+                CreatedBy = "ADMIN",
+                UpdatedBy = "ADMIN"
+            });
+
+            builder.Entity<TrainStation>().HasData(new TrainStation
+            {
+                TrainStationID = Guid.NewGuid(),
+                TrainStationCode = "ST6",
+                TrainStationNumber = 6,
+                IsActive = true,
+                CreatedBy = "ADMIN",
+                UpdatedBy = "ADMIN"
+            });
+
+            builder.Entity<TrainStation>().HasData(new TrainStation
+            {
+                TrainStationID = Guid.NewGuid(),
+                TrainStationCode = "ST7",
+                TrainStationNumber = 7,
+                IsActive = true,
+                CreatedBy = "ADMIN",
+                UpdatedBy = "ADMIN"
+            });
+
+            builder.Entity<TrainStation>().HasData(new TrainStation
+            {
+                TrainStationID = Guid.NewGuid(),
+                TrainStationCode = "ST8",
+                TrainStationNumber = 8,
+                IsActive = true,
+                CreatedBy = "ADMIN",
+                UpdatedBy = "ADMIN"
+            });
+
+            builder.Entity<TrainStation>().HasData(new TrainStation
+            {
+                TrainStationID = Guid.NewGuid(),
+                TrainStationCode = "ST9",
+                TrainStationNumber = 9,
+                IsActive = true,
+                CreatedBy = "ADMIN",
+                UpdatedBy = "ADMIN"
+            });
+
+            builder.Entity<TrainStation>().HasData(new TrainStation
+            {
+                TrainStationID = Guid.NewGuid(),
+                TrainStationCode = "ST10",
+                TrainStationNumber = 10,
+                IsActive = true,
+                CreatedBy = "ADMIN",
+                UpdatedBy = "ADMIN"
+            });
 
             builder.ApplyConfiguration(new ApplicationUserEntityConfiguration());
         }
