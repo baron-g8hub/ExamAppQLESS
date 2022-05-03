@@ -16,6 +16,10 @@ namespace Common.Models
         public decimal? AmountTripCharge { get; set; }
 
         public string? TransportCardTripOperatorCode { get; set; }
+    
+        public string? OriginStationCode { get; set; }
+    
+        public string? DestinationStationCode { get; set; }
 
         public bool HasGateIN { get; set; } = false;
 
@@ -24,12 +28,9 @@ namespace Common.Models
         [ConcurrencyCheck]
         [Timestamp]
         public byte[]? RowVersion { get; set; }
-        
-        //[InverseProperty("TrainStationFrom")]
-        //public TrainStation TrainStationFrom { get; set; } = null!;
-        
-        //[InverseProperty("TrainStationTo")]
-        //public TrainStation TrainStationTo { get; set; } = null!;
 
+        
+
+        public ICollection<TrainStation>? TrainStations { get; set; }
     }
 }

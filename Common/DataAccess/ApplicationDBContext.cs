@@ -48,9 +48,10 @@ namespace Common.DataAccess
             builder.Entity<TransportCardTrip>().Property(p => p.RowVersion).IsRowVersion();
 
 
-            //builder.Entity<TrainStation>().HasOne(p => p.TransportCardTrip).WithOne(b => b.TrainStationFrom);
-            //builder.Entity<TrainStation>().HasOne(p => p.TransportCardTrip).WithOne(b => b.TrainStationTo);
+            //builder.Entity<TransportCardTrip>().HasOne(p => p.OriginStation).WithMany();
+            //builder.Entity<TransportCardTrip>().HasOne(p => p.DestinationStation).WithMany();
 
+            builder.Entity<TransportCardTrip>().HasMany(c => c.TrainStations).WithOne(e => e.TransportCardTrip);
 
             builder.Entity<GenEmpUID>()
                   .HasOne(b => b.Employee)

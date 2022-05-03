@@ -35,6 +35,6 @@ namespace Common.Models
         [Timestamp]
         public byte[]? RowVersion { get; set; }
 
-        public ICollection<TransportCardTrip> TransportCardTrips { get; set; } = null!;
+        public TransportCardTrip? TransportCardTrip { get; set; }
     }
 }

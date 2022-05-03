@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Common.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220501233756_CardTransactionxxx")]
-    partial class CardTransactionxxx
+    [Migration("20220503145516_DestinationsStaT")]
+    partial class DestinationsStaT
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -160,6 +160,8 @@ namespace Common.Migrations
 
                     b.HasKey("CardTransactionID");
 
+                    b.HasIndex("TransportCardID");
+
                     b.ToTable("CardTransactions");
                 });
 
@@ -278,6 +280,166 @@ namespace Common.Migrations
                     b.ToTable("RAWSMARTCARDs");
                 });
 
+            modelBuilder.Entity("Common.Models.TrainStation", b =>
+                {
+                    b.Property<Guid>("TrainStationID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("TrainStationID");
+
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(100)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<string>("TrainStationCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TrainStationNumber")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("TransportCardTripID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasMaxLength(100)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime");
+
+                    b.HasKey("TrainStationID");
+
+                    b.HasIndex("TransportCardTripID");
+
+                    b.ToTable("TrainStations");
+
+                    b.HasData(
+                        new
+                        {
+                            TrainStationID = new Guid("70ac4f66-7b07-4f61-99cf-ca5c8f2fd47f"),
+                            CreatedBy = "ADMIN",
+                            CreatedDate = new DateTime(2022, 5, 3, 14, 55, 16, 90, DateTimeKind.Utc).AddTicks(9050),
+                            IsActive = true,
+                            TrainStationCode = "ST1",
+                            TrainStationNumber = 1,
+                            UpdatedBy = "ADMIN",
+                            UpdatedDate = new DateTime(2022, 5, 3, 14, 55, 16, 90, DateTimeKind.Utc).AddTicks(9053)
+                        },
+                        new
+                        {
+                            TrainStationID = new Guid("cf78f8b5-6396-4c61-9505-d477ab55d87c"),
+                            CreatedBy = "ADMIN",
+                            CreatedDate = new DateTime(2022, 5, 3, 14, 55, 16, 90, DateTimeKind.Utc).AddTicks(9142),
+                            IsActive = true,
+                            TrainStationCode = "ST2",
+                            TrainStationNumber = 2,
+                            UpdatedBy = "ADMIN",
+                            UpdatedDate = new DateTime(2022, 5, 3, 14, 55, 16, 90, DateTimeKind.Utc).AddTicks(9142)
+                        },
+                        new
+                        {
+                            TrainStationID = new Guid("e30f5299-0441-4cf5-89a4-083a33d74d2f"),
+                            CreatedBy = "ADMIN",
+                            CreatedDate = new DateTime(2022, 5, 3, 14, 55, 16, 90, DateTimeKind.Utc).AddTicks(9162),
+                            IsActive = true,
+                            TrainStationCode = "ST3",
+                            TrainStationNumber = 3,
+                            UpdatedBy = "ADMIN",
+                            UpdatedDate = new DateTime(2022, 5, 3, 14, 55, 16, 90, DateTimeKind.Utc).AddTicks(9163)
+                        },
+                        new
+                        {
+                            TrainStationID = new Guid("1a639ece-f89d-4dbe-a2c0-77e18167ab20"),
+                            CreatedBy = "ADMIN",
+                            CreatedDate = new DateTime(2022, 5, 3, 14, 55, 16, 90, DateTimeKind.Utc).AddTicks(9180),
+                            IsActive = true,
+                            TrainStationCode = "ST4",
+                            TrainStationNumber = 4,
+                            UpdatedBy = "ADMIN",
+                            UpdatedDate = new DateTime(2022, 5, 3, 14, 55, 16, 90, DateTimeKind.Utc).AddTicks(9180)
+                        },
+                        new
+                        {
+                            TrainStationID = new Guid("27acfeb2-82f6-4601-bd01-feceeea36b56"),
+                            CreatedBy = "ADMIN",
+                            CreatedDate = new DateTime(2022, 5, 3, 14, 55, 16, 90, DateTimeKind.Utc).AddTicks(9196),
+                            IsActive = true,
+                            TrainStationCode = "ST5",
+                            TrainStationNumber = 5,
+                            UpdatedBy = "ADMIN",
+                            UpdatedDate = new DateTime(2022, 5, 3, 14, 55, 16, 90, DateTimeKind.Utc).AddTicks(9197)
+                        },
+                        new
+                        {
+                            TrainStationID = new Guid("cfbebb1d-b650-4008-86cf-e5fef21ff39a"),
+                            CreatedBy = "ADMIN",
+                            CreatedDate = new DateTime(2022, 5, 3, 14, 55, 16, 90, DateTimeKind.Utc).AddTicks(9217),
+                            IsActive = true,
+                            TrainStationCode = "ST6",
+                            TrainStationNumber = 6,
+                            UpdatedBy = "ADMIN",
+                            UpdatedDate = new DateTime(2022, 5, 3, 14, 55, 16, 90, DateTimeKind.Utc).AddTicks(9218)
+                        },
+                        new
+                        {
+                            TrainStationID = new Guid("a01ccf75-99ee-4f84-ad3e-a3100b1becb3"),
+                            CreatedBy = "ADMIN",
+                            CreatedDate = new DateTime(2022, 5, 3, 14, 55, 16, 90, DateTimeKind.Utc).AddTicks(9255),
+                            IsActive = true,
+                            TrainStationCode = "ST7",
+                            TrainStationNumber = 7,
+                            UpdatedBy = "ADMIN",
+                            UpdatedDate = new DateTime(2022, 5, 3, 14, 55, 16, 90, DateTimeKind.Utc).AddTicks(9256)
+                        },
+                        new
+                        {
+                            TrainStationID = new Guid("a2d1e49b-89b3-4b08-ae13-d2d15c8fad1a"),
+                            CreatedBy = "ADMIN",
+                            CreatedDate = new DateTime(2022, 5, 3, 14, 55, 16, 90, DateTimeKind.Utc).AddTicks(9272),
+                            IsActive = true,
+                            TrainStationCode = "ST8",
+                            TrainStationNumber = 8,
+                            UpdatedBy = "ADMIN",
+                            UpdatedDate = new DateTime(2022, 5, 3, 14, 55, 16, 90, DateTimeKind.Utc).AddTicks(9273)
+                        },
+                        new
+                        {
+                            TrainStationID = new Guid("103580e7-9745-4478-b615-f91c0e3b7cce"),
+                            CreatedBy = "ADMIN",
+                            CreatedDate = new DateTime(2022, 5, 3, 14, 55, 16, 90, DateTimeKind.Utc).AddTicks(9289),
+                            IsActive = true,
+                            TrainStationCode = "ST9",
+                            TrainStationNumber = 9,
+                            UpdatedBy = "ADMIN",
+                            UpdatedDate = new DateTime(2022, 5, 3, 14, 55, 16, 90, DateTimeKind.Utc).AddTicks(9289)
+                        },
+                        new
+                        {
+                            TrainStationID = new Guid("10b17efc-ed6f-4a55-90bb-2426cceb971e"),
+                            CreatedBy = "ADMIN",
+                            CreatedDate = new DateTime(2022, 5, 3, 14, 55, 16, 90, DateTimeKind.Utc).AddTicks(9307),
+                            IsActive = true,
+                            TrainStationCode = "ST10",
+                            TrainStationNumber = 10,
+                            UpdatedBy = "ADMIN",
+                            UpdatedDate = new DateTime(2022, 5, 3, 14, 55, 16, 90, DateTimeKind.Utc).AddTicks(9308)
+                        });
+                });
+
             modelBuilder.Entity("Common.Models.TransportCard", b =>
                 {
                     b.Property<int>("TransportCardID")
@@ -331,6 +493,48 @@ namespace Common.Migrations
                     b.HasIndex("RAWSMARTCARDSmartCardID");
 
                     b.ToTable("TransportCards");
+                });
+
+            modelBuilder.Entity("Common.Models.TransportCardTrip", b =>
+                {
+                    b.Property<Guid>("TransportCardTripID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal?>("AmountTripCharge")
+                        .HasColumnType("smallmoney");
+
+                    b.Property<string>("DestinationStationCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("HasGateIN")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("HasGateOUT")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("OriginStationCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.Property<int?>("TransportCardID")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("TransportCardTripDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("TransportCardTripOperatorCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("TransportCardTripID");
+
+                    b.HasIndex("TransportCardID");
+
+                    b.ToTable("TransportCardTrips");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -443,6 +647,15 @@ namespace Common.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Common.Models.CardTransaction", b =>
+                {
+                    b.HasOne("Common.Models.TransportCard", null)
+                        .WithMany("CardTransactions")
+                        .HasForeignKey("TransportCardID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Common.Models.Employee", b =>
                 {
                     b.HasOne("Common.Models.GenEmpUID", "GenEmpUID")
@@ -454,6 +667,15 @@ namespace Common.Migrations
                     b.Navigation("GenEmpUID");
                 });
 
+            modelBuilder.Entity("Common.Models.TrainStation", b =>
+                {
+                    b.HasOne("Common.Models.TransportCardTrip", "TransportCardTrip")
+                        .WithMany("TrainStations")
+                        .HasForeignKey("TransportCardTripID");
+
+                    b.Navigation("TransportCardTrip");
+                });
+
             modelBuilder.Entity("Common.Models.TransportCard", b =>
                 {
                     b.HasOne("Common.Models.RAWSMARTCARD", "RAWSMARTCARD")
@@ -463,6 +685,13 @@ namespace Common.Migrations
                         .IsRequired();
 
                     b.Navigation("RAWSMARTCARD");
+                });
+
+            modelBuilder.Entity("Common.Models.TransportCardTrip", b =>
+                {
+                    b.HasOne("Common.Models.TransportCard", null)
+                        .WithMany("transportCardTrips")
+                        .HasForeignKey("TransportCardID");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -524,6 +753,18 @@ namespace Common.Migrations
             modelBuilder.Entity("Common.Models.RAWSMARTCARD", b =>
                 {
                     b.Navigation("TransportCards");
+                });
+
+            modelBuilder.Entity("Common.Models.TransportCard", b =>
+                {
+                    b.Navigation("CardTransactions");
+
+                    b.Navigation("transportCardTrips");
+                });
+
+            modelBuilder.Entity("Common.Models.TransportCardTrip", b =>
+                {
+                    b.Navigation("TrainStations");
                 });
 #pragma warning restore 612, 618
         }
