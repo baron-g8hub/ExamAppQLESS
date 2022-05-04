@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Common.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class CreateInit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -333,10 +333,10 @@ namespace Common.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName", "RoleLevel" },
                 values: new object[,]
                 {
-                    { "cc43a088-f4b7-4b23-9c7d-473962e57db5", "fc16153c-980f-4609-9fc9-33f4460a065c", "Administrator", "ADMINISTRATOR", 100 },
-                    { "cdaa4378-93b0-400a-b426-51a0c14ed63f", "bac3ce0a-f43f-449c-be75-ac1a6faedf5c", "Manager", "MANAGER", 200 },
-                    { "e05134ec-ae18-4c07-a637-8d521fb2acda", "1dcf5388-86e4-41b5-8ea4-06fd14a84502", "Clerk", "CLERK", 300 },
-                    { "e3bc7747-cb11-4c48-aad6-3043321977cf", "4fc7f7be-ab84-486b-a48d-a8834b30ca55", "User", "USER", 400 }
+                    { "56e329b2-a1ff-4211-9893-979d691f11cc", "d328a59f-1fdb-4d4a-bcee-852ae8c6f49f", "Manager", "MANAGER", 200 },
+                    { "9dff8b12-8915-4b34-bcbb-7f0ecedd1129", "245bed92-c73f-4428-a9a5-7fa85f05b3fb", "Clerk", "CLERK", 300 },
+                    { "a4cae062-f7c8-42ae-97c8-c2038cc58937", "adbf7237-b20d-4ae1-bc6e-d08f04c20fd0", "Administrator", "ADMINISTRATOR", 100 },
+                    { "e5351832-2511-41d5-96ef-fb3a4e58e975", "0fedff64-5ac8-411f-a6ce-fe5bfd07df35", "User", "USER", 400 }
                 });
 
             migrationBuilder.InsertData(
@@ -344,16 +344,16 @@ namespace Common.Migrations
                 columns: new[] { "TrainStationID", "CreatedBy", "CreatedDate", "IsActive", "TrainStationCode", "TrainStationNumber", "TransportCardTripID", "UpdatedBy", "UpdatedDate" },
                 values: new object[,]
                 {
-                    { new Guid("27630e56-51f4-48df-ba1c-3647eafe2e4d"), "ADMIN", new DateTime(2022, 5, 4, 15, 31, 28, 650, DateTimeKind.Utc).AddTicks(1034), true, "ST5", 5, null, "ADMIN", new DateTime(2022, 5, 4, 15, 31, 28, 650, DateTimeKind.Utc).AddTicks(1034) },
-                    { new Guid("33357c80-189c-43e2-92ed-e2dbe360fd15"), "ADMIN", new DateTime(2022, 5, 4, 15, 31, 28, 650, DateTimeKind.Utc).AddTicks(1052), true, "ST7", 7, null, "ADMIN", new DateTime(2022, 5, 4, 15, 31, 28, 650, DateTimeKind.Utc).AddTicks(1052) },
-                    { new Guid("58787f77-7da4-4e94-bf39-b8119c06ac84"), "ADMIN", new DateTime(2022, 5, 4, 15, 31, 28, 650, DateTimeKind.Utc).AddTicks(1004), true, "ST2", 2, null, "ADMIN", new DateTime(2022, 5, 4, 15, 31, 28, 650, DateTimeKind.Utc).AddTicks(1004) },
-                    { new Guid("58a0d9d2-2899-4d40-ae05-8e49567964ea"), "ADMIN", new DateTime(2022, 5, 4, 15, 31, 28, 650, DateTimeKind.Utc).AddTicks(1059), true, "ST8", 8, null, "ADMIN", new DateTime(2022, 5, 4, 15, 31, 28, 650, DateTimeKind.Utc).AddTicks(1060) },
-                    { new Guid("a1554584-56fd-418f-82ca-949109103912"), "ADMIN", new DateTime(2022, 5, 4, 15, 31, 28, 650, DateTimeKind.Utc).AddTicks(1014), true, "ST3", 3, null, "ADMIN", new DateTime(2022, 5, 4, 15, 31, 28, 650, DateTimeKind.Utc).AddTicks(1014) },
-                    { new Guid("b4023a1e-75a7-49fc-9fdc-a06336c388d4"), "ADMIN", new DateTime(2022, 5, 4, 15, 31, 28, 650, DateTimeKind.Utc).AddTicks(1044), true, "ST6", 6, null, "ADMIN", new DateTime(2022, 5, 4, 15, 31, 28, 650, DateTimeKind.Utc).AddTicks(1044) },
-                    { new Guid("ba94e749-ebcc-4c89-b27f-9810795c0dbc"), "ADMIN", new DateTime(2022, 5, 4, 15, 31, 28, 650, DateTimeKind.Utc).AddTicks(1077), true, "ST10", 10, null, "ADMIN", new DateTime(2022, 5, 4, 15, 31, 28, 650, DateTimeKind.Utc).AddTicks(1078) },
-                    { new Guid("ce715ee6-d6d7-43f0-9dcb-49e2bb120b33"), "ADMIN", new DateTime(2022, 5, 4, 15, 31, 28, 650, DateTimeKind.Utc).AddTicks(1067), true, "ST9", 9, null, "ADMIN", new DateTime(2022, 5, 4, 15, 31, 28, 650, DateTimeKind.Utc).AddTicks(1067) },
-                    { new Guid("d4f46165-e0df-4df8-a1be-a3e97ae0fdaf"), "ADMIN", new DateTime(2022, 5, 4, 15, 31, 28, 650, DateTimeKind.Utc).AddTicks(990), true, "ST1", 1, null, "ADMIN", new DateTime(2022, 5, 4, 15, 31, 28, 650, DateTimeKind.Utc).AddTicks(993) },
-                    { new Guid("eae681f8-c45f-491d-9a09-e0029a3ef8c1"), "ADMIN", new DateTime(2022, 5, 4, 15, 31, 28, 650, DateTimeKind.Utc).AddTicks(1022), true, "ST4", 4, null, "ADMIN", new DateTime(2022, 5, 4, 15, 31, 28, 650, DateTimeKind.Utc).AddTicks(1022) }
+                    { new Guid("0550f021-e5bf-474b-9b01-914fbcd251de"), "ADMIN", new DateTime(2022, 5, 4, 15, 55, 48, 288, DateTimeKind.Utc).AddTicks(5164), true, "ST5", 5, null, "ADMIN", new DateTime(2022, 5, 4, 15, 55, 48, 288, DateTimeKind.Utc).AddTicks(5164) },
+                    { new Guid("06a017bf-6228-4c2b-81ce-77bbb772226d"), "ADMIN", new DateTime(2022, 5, 4, 15, 55, 48, 288, DateTimeKind.Utc).AddTicks(5190), true, "ST7", 7, null, "ADMIN", new DateTime(2022, 5, 4, 15, 55, 48, 288, DateTimeKind.Utc).AddTicks(5191) },
+                    { new Guid("17e4c44b-cac4-4ac9-9978-f9369d9088b6"), "ADMIN", new DateTime(2022, 5, 4, 15, 55, 48, 288, DateTimeKind.Utc).AddTicks(5154), true, "ST4", 4, null, "ADMIN", new DateTime(2022, 5, 4, 15, 55, 48, 288, DateTimeKind.Utc).AddTicks(5155) },
+                    { new Guid("2760da89-f9bd-42ad-9e51-9a5a4dc4e98c"), "ADMIN", new DateTime(2022, 5, 4, 15, 55, 48, 288, DateTimeKind.Utc).AddTicks(5179), true, "ST6", 6, null, "ADMIN", new DateTime(2022, 5, 4, 15, 55, 48, 288, DateTimeKind.Utc).AddTicks(5180) },
+                    { new Guid("2a336f84-9030-4952-888c-93bf102f3a0c"), "ADMIN", new DateTime(2022, 5, 4, 15, 55, 48, 288, DateTimeKind.Utc).AddTicks(5114), true, "ST1", 1, null, "ADMIN", new DateTime(2022, 5, 4, 15, 55, 48, 288, DateTimeKind.Utc).AddTicks(5117) },
+                    { new Guid("2b0c21fb-689a-4d8a-9537-4adc1c0cf040"), "ADMIN", new DateTime(2022, 5, 4, 15, 55, 48, 288, DateTimeKind.Utc).AddTicks(5222), true, "ST10", 10, null, "ADMIN", new DateTime(2022, 5, 4, 15, 55, 48, 288, DateTimeKind.Utc).AddTicks(5222) },
+                    { new Guid("629cab4d-51e9-41de-a28d-5943124e48b6"), "ADMIN", new DateTime(2022, 5, 4, 15, 55, 48, 288, DateTimeKind.Utc).AddTicks(5133), true, "ST2", 2, null, "ADMIN", new DateTime(2022, 5, 4, 15, 55, 48, 288, DateTimeKind.Utc).AddTicks(5133) },
+                    { new Guid("641b09a9-16c7-46bd-a717-441133399d7b"), "ADMIN", new DateTime(2022, 5, 4, 15, 55, 48, 288, DateTimeKind.Utc).AddTicks(5210), true, "ST9", 9, null, "ADMIN", new DateTime(2022, 5, 4, 15, 55, 48, 288, DateTimeKind.Utc).AddTicks(5211) },
+                    { new Guid("68bdee88-f25b-4045-80fe-100202f1601f"), "ADMIN", new DateTime(2022, 5, 4, 15, 55, 48, 288, DateTimeKind.Utc).AddTicks(5144), true, "ST3", 3, null, "ADMIN", new DateTime(2022, 5, 4, 15, 55, 48, 288, DateTimeKind.Utc).AddTicks(5144) },
+                    { new Guid("ccd58bb3-d32c-44e9-8c39-6602fe8c0d67"), "ADMIN", new DateTime(2022, 5, 4, 15, 55, 48, 288, DateTimeKind.Utc).AddTicks(5200), true, "ST8", 8, null, "ADMIN", new DateTime(2022, 5, 4, 15, 55, 48, 288, DateTimeKind.Utc).AddTicks(5200) }
                 });
 
             migrationBuilder.CreateIndex(
