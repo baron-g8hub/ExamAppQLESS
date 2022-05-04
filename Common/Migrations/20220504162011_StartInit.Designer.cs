@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Common.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220504155548_CreateInit")]
-    partial class CreateInit
+    [Migration("20220504162011_StartInit")]
+    partial class StartInit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -56,32 +56,32 @@ namespace Common.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "a4cae062-f7c8-42ae-97c8-c2038cc58937",
-                            ConcurrencyStamp = "adbf7237-b20d-4ae1-bc6e-d08f04c20fd0",
+                            Id = "8a9feb7d-7c54-4f89-887a-7c6c40437783",
+                            ConcurrencyStamp = "4fd945ea-6ea9-4590-b476-c958a8545c54",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR",
                             RoleLevel = 100
                         },
                         new
                         {
-                            Id = "56e329b2-a1ff-4211-9893-979d691f11cc",
-                            ConcurrencyStamp = "d328a59f-1fdb-4d4a-bcee-852ae8c6f49f",
+                            Id = "3d0e536b-4df8-4e34-96fa-5c0a2a2c23de",
+                            ConcurrencyStamp = "22102af4-688e-4f90-b015-b8b3fe399a5c",
                             Name = "Manager",
                             NormalizedName = "MANAGER",
                             RoleLevel = 200
                         },
                         new
                         {
-                            Id = "9dff8b12-8915-4b34-bcbb-7f0ecedd1129",
-                            ConcurrencyStamp = "245bed92-c73f-4428-a9a5-7fa85f05b3fb",
+                            Id = "d2a1d8c3-b654-476a-b1d9-1d42e6ff69f6",
+                            ConcurrencyStamp = "f0b4e969-54de-47f6-86bc-a9c3a3d7a850",
                             Name = "Clerk",
                             NormalizedName = "CLERK",
                             RoleLevel = 300
                         },
                         new
                         {
-                            Id = "e5351832-2511-41d5-96ef-fb3a4e58e975",
-                            ConcurrencyStamp = "0fedff64-5ac8-411f-a6ce-fe5bfd07df35",
+                            Id = "0a69c526-ed99-4cdc-9207-d981dbe380cd",
+                            ConcurrencyStamp = "597acb76-16e4-47ba-b2d4-5e2973eb983d",
                             Name = "User",
                             NormalizedName = "USER",
                             RoleLevel = 400
@@ -370,113 +370,113 @@ namespace Common.Migrations
                     b.HasData(
                         new
                         {
-                            TrainStationID = new Guid("2a336f84-9030-4952-888c-93bf102f3a0c"),
+                            TrainStationID = new Guid("f2a7ee06-64a8-4f8d-979c-9684532169ab"),
                             CreatedBy = "ADMIN",
-                            CreatedDate = new DateTime(2022, 5, 4, 15, 55, 48, 288, DateTimeKind.Utc).AddTicks(5114),
+                            CreatedDate = new DateTime(2022, 5, 4, 16, 20, 11, 104, DateTimeKind.Utc).AddTicks(8411),
                             IsActive = true,
                             TrainStationCode = "ST1",
                             TrainStationNumber = 1,
                             UpdatedBy = "ADMIN",
-                            UpdatedDate = new DateTime(2022, 5, 4, 15, 55, 48, 288, DateTimeKind.Utc).AddTicks(5117)
+                            UpdatedDate = new DateTime(2022, 5, 4, 16, 20, 11, 104, DateTimeKind.Utc).AddTicks(8413)
                         },
                         new
                         {
-                            TrainStationID = new Guid("629cab4d-51e9-41de-a28d-5943124e48b6"),
+                            TrainStationID = new Guid("30894685-fb9f-4c85-b191-1599eeb3ae56"),
                             CreatedBy = "ADMIN",
-                            CreatedDate = new DateTime(2022, 5, 4, 15, 55, 48, 288, DateTimeKind.Utc).AddTicks(5133),
+                            CreatedDate = new DateTime(2022, 5, 4, 16, 20, 11, 104, DateTimeKind.Utc).AddTicks(8430),
                             IsActive = true,
                             TrainStationCode = "ST2",
                             TrainStationNumber = 2,
                             UpdatedBy = "ADMIN",
-                            UpdatedDate = new DateTime(2022, 5, 4, 15, 55, 48, 288, DateTimeKind.Utc).AddTicks(5133)
+                            UpdatedDate = new DateTime(2022, 5, 4, 16, 20, 11, 104, DateTimeKind.Utc).AddTicks(8430)
                         },
                         new
                         {
-                            TrainStationID = new Guid("68bdee88-f25b-4045-80fe-100202f1601f"),
+                            TrainStationID = new Guid("60512051-4ee0-458e-badb-f2c852a9b06b"),
                             CreatedBy = "ADMIN",
-                            CreatedDate = new DateTime(2022, 5, 4, 15, 55, 48, 288, DateTimeKind.Utc).AddTicks(5144),
+                            CreatedDate = new DateTime(2022, 5, 4, 16, 20, 11, 104, DateTimeKind.Utc).AddTicks(8439),
                             IsActive = true,
                             TrainStationCode = "ST3",
                             TrainStationNumber = 3,
                             UpdatedBy = "ADMIN",
-                            UpdatedDate = new DateTime(2022, 5, 4, 15, 55, 48, 288, DateTimeKind.Utc).AddTicks(5144)
+                            UpdatedDate = new DateTime(2022, 5, 4, 16, 20, 11, 104, DateTimeKind.Utc).AddTicks(8440)
                         },
                         new
                         {
-                            TrainStationID = new Guid("17e4c44b-cac4-4ac9-9978-f9369d9088b6"),
+                            TrainStationID = new Guid("ee97077a-415a-429e-b90e-8feeb048d8c0"),
                             CreatedBy = "ADMIN",
-                            CreatedDate = new DateTime(2022, 5, 4, 15, 55, 48, 288, DateTimeKind.Utc).AddTicks(5154),
+                            CreatedDate = new DateTime(2022, 5, 4, 16, 20, 11, 104, DateTimeKind.Utc).AddTicks(8448),
                             IsActive = true,
                             TrainStationCode = "ST4",
                             TrainStationNumber = 4,
                             UpdatedBy = "ADMIN",
-                            UpdatedDate = new DateTime(2022, 5, 4, 15, 55, 48, 288, DateTimeKind.Utc).AddTicks(5155)
+                            UpdatedDate = new DateTime(2022, 5, 4, 16, 20, 11, 104, DateTimeKind.Utc).AddTicks(8448)
                         },
                         new
                         {
-                            TrainStationID = new Guid("0550f021-e5bf-474b-9b01-914fbcd251de"),
+                            TrainStationID = new Guid("8fb3b0c6-4c8a-423c-b8df-510ecdc90cfe"),
                             CreatedBy = "ADMIN",
-                            CreatedDate = new DateTime(2022, 5, 4, 15, 55, 48, 288, DateTimeKind.Utc).AddTicks(5164),
+                            CreatedDate = new DateTime(2022, 5, 4, 16, 20, 11, 104, DateTimeKind.Utc).AddTicks(8520),
                             IsActive = true,
                             TrainStationCode = "ST5",
                             TrainStationNumber = 5,
                             UpdatedBy = "ADMIN",
-                            UpdatedDate = new DateTime(2022, 5, 4, 15, 55, 48, 288, DateTimeKind.Utc).AddTicks(5164)
+                            UpdatedDate = new DateTime(2022, 5, 4, 16, 20, 11, 104, DateTimeKind.Utc).AddTicks(8521)
                         },
                         new
                         {
-                            TrainStationID = new Guid("2760da89-f9bd-42ad-9e51-9a5a4dc4e98c"),
+                            TrainStationID = new Guid("1d5ba6aa-69e6-4cfa-9eba-a3308f916864"),
                             CreatedBy = "ADMIN",
-                            CreatedDate = new DateTime(2022, 5, 4, 15, 55, 48, 288, DateTimeKind.Utc).AddTicks(5179),
+                            CreatedDate = new DateTime(2022, 5, 4, 16, 20, 11, 104, DateTimeKind.Utc).AddTicks(8533),
                             IsActive = true,
                             TrainStationCode = "ST6",
                             TrainStationNumber = 6,
                             UpdatedBy = "ADMIN",
-                            UpdatedDate = new DateTime(2022, 5, 4, 15, 55, 48, 288, DateTimeKind.Utc).AddTicks(5180)
+                            UpdatedDate = new DateTime(2022, 5, 4, 16, 20, 11, 104, DateTimeKind.Utc).AddTicks(8533)
                         },
                         new
                         {
-                            TrainStationID = new Guid("06a017bf-6228-4c2b-81ce-77bbb772226d"),
+                            TrainStationID = new Guid("9b29500b-cc4c-4139-9a89-1ef8a1c0022f"),
                             CreatedBy = "ADMIN",
-                            CreatedDate = new DateTime(2022, 5, 4, 15, 55, 48, 288, DateTimeKind.Utc).AddTicks(5190),
+                            CreatedDate = new DateTime(2022, 5, 4, 16, 20, 11, 104, DateTimeKind.Utc).AddTicks(8542),
                             IsActive = true,
                             TrainStationCode = "ST7",
                             TrainStationNumber = 7,
                             UpdatedBy = "ADMIN",
-                            UpdatedDate = new DateTime(2022, 5, 4, 15, 55, 48, 288, DateTimeKind.Utc).AddTicks(5191)
+                            UpdatedDate = new DateTime(2022, 5, 4, 16, 20, 11, 104, DateTimeKind.Utc).AddTicks(8542)
                         },
                         new
                         {
-                            TrainStationID = new Guid("ccd58bb3-d32c-44e9-8c39-6602fe8c0d67"),
+                            TrainStationID = new Guid("b38da52d-6c33-49f3-897b-e2c5c8ce3d62"),
                             CreatedBy = "ADMIN",
-                            CreatedDate = new DateTime(2022, 5, 4, 15, 55, 48, 288, DateTimeKind.Utc).AddTicks(5200),
+                            CreatedDate = new DateTime(2022, 5, 4, 16, 20, 11, 104, DateTimeKind.Utc).AddTicks(8550),
                             IsActive = true,
                             TrainStationCode = "ST8",
                             TrainStationNumber = 8,
                             UpdatedBy = "ADMIN",
-                            UpdatedDate = new DateTime(2022, 5, 4, 15, 55, 48, 288, DateTimeKind.Utc).AddTicks(5200)
+                            UpdatedDate = new DateTime(2022, 5, 4, 16, 20, 11, 104, DateTimeKind.Utc).AddTicks(8550)
                         },
                         new
                         {
-                            TrainStationID = new Guid("641b09a9-16c7-46bd-a717-441133399d7b"),
+                            TrainStationID = new Guid("169fe3a1-5eca-483b-8e84-8f0d8ed35d97"),
                             CreatedBy = "ADMIN",
-                            CreatedDate = new DateTime(2022, 5, 4, 15, 55, 48, 288, DateTimeKind.Utc).AddTicks(5210),
+                            CreatedDate = new DateTime(2022, 5, 4, 16, 20, 11, 104, DateTimeKind.Utc).AddTicks(8559),
                             IsActive = true,
                             TrainStationCode = "ST9",
                             TrainStationNumber = 9,
                             UpdatedBy = "ADMIN",
-                            UpdatedDate = new DateTime(2022, 5, 4, 15, 55, 48, 288, DateTimeKind.Utc).AddTicks(5211)
+                            UpdatedDate = new DateTime(2022, 5, 4, 16, 20, 11, 104, DateTimeKind.Utc).AddTicks(8559)
                         },
                         new
                         {
-                            TrainStationID = new Guid("2b0c21fb-689a-4d8a-9537-4adc1c0cf040"),
+                            TrainStationID = new Guid("8fb9416c-abfe-4183-952c-356367ae7a66"),
                             CreatedBy = "ADMIN",
-                            CreatedDate = new DateTime(2022, 5, 4, 15, 55, 48, 288, DateTimeKind.Utc).AddTicks(5222),
+                            CreatedDate = new DateTime(2022, 5, 4, 16, 20, 11, 104, DateTimeKind.Utc).AddTicks(8568),
                             IsActive = true,
                             TrainStationCode = "ST10",
                             TrainStationNumber = 10,
                             UpdatedBy = "ADMIN",
-                            UpdatedDate = new DateTime(2022, 5, 4, 15, 55, 48, 288, DateTimeKind.Utc).AddTicks(5222)
+                            UpdatedDate = new DateTime(2022, 5, 4, 16, 20, 11, 104, DateTimeKind.Utc).AddTicks(8568)
                         });
                 });
 
