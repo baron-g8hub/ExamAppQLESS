@@ -1,5 +1,5 @@
 ﻿using Common.Contracts;
-using Common.DataAccess;
+using Common;
 
 namespace Common.Repositories
 {

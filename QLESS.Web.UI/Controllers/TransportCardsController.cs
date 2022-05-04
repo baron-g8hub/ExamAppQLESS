@@ -1,4 +1,4 @@
-﻿using Common.DataAccess;
+﻿using Common;
 using Common.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -78,6 +78,13 @@ namespace QLESS.Web.UI.Controllers
         {
             var transactions = await _context.CardTransactions.ToListAsync();
             var transportCards = await _context.TransportCards.ToListAsync();
+            if (CardExists(id))
+            {
+                if (CheckLastUsed(_context.TransportCards.Find(id)!.LastUsedDate, 5) > 0)
+                {
+                    ModelState.AddModelError(string.Empty, "This card is no logher valid. Last used date exceeded more than 5 years.");
+                }
+            }
 
             var list = new List<CardTransaction>();
             if (transportCards.Count > 0)
@@ -242,6 +249,23 @@ namespace QLESS.Web.UI.Controllers
             {
                 return View();
             }
+        }
+
+
+        private bool CardExists(int id)
+        {
+            return _context.TransportCards.Any(e => e.TransportCardID == id);
+        }
+
+        public int CheckLastUsed(DateTime? date, int years)
+        {
+            if (date != null)
+            {
+                var currentDate = DateTime.Now;
+                var date1 = date.Value.AddDays(years);
+                return DateTime.Compare(date1, currentDate);
+            }
+            return 0;
         }
     }
 }

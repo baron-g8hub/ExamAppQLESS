@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
-using Common.DataAccess;
+using Common;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -15,10 +15,12 @@ namespace QLESS.Web.UI.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, ILogger<LoginModel> logger)
         {
             _signInManager = signInManager;
+            _userManager = userManager;
             _logger = logger;
         }
 
@@ -88,14 +90,33 @@ namespace QLESS.Web.UI.Areas.Identity.Pages.Account
             {
                 ModelState.AddModelError(string.Empty, ErrorMessage);
             }
-
             returnUrl ??= Url.Content("~/");
-
             // Clear the existing external cookie to ensure a clean login process
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-
+            var list = _userManager.Users.ToList();
+            if (list.Count == 0)
+            {
+                var user = new ApplicationUser
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    UserUID = "U10001",
+                    UserName = "U10001",
+                    BranchCode = "MAIN",
+                    Email = "admin@test"
+                };
+                var result1 = await _userManager.CreateAsync(user, "123456");
+                if (result1.Succeeded)
+                {
+                    var result2 = await _signInManager.PasswordSignInAsync(user.UserName, "123456", true, lockoutOnFailure: false);
+                    if (result2.Succeeded)
+                    {
+                        _logger.LogInformation("User logged in.");
+                        LocalRedirect(returnUrl);
+                    }
+                }
+            }
             ReturnUrl = returnUrl;
         }
 
@@ -107,6 +128,8 @@ namespace QLESS.Web.UI.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
+
+
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager.PasswordSignInAsync(Input.EmployeeNumber, Input.Password, Input.RememberMe, lockoutOnFailure: false);

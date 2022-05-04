@@ -1,11 +1,11 @@
-﻿using Common.DataAccess;
+﻿using Common;
 using Common.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Common.DataAccess
+namespace Common
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
@@ -33,17 +33,14 @@ namespace Common.DataAccess
             // Add your customizations after calling base.OnModelCreating(builder);
             //  builder.Entity<RAWSMARTCARD>().Property(e => e.IsActive).HasConversion(converter);
 
-
             builder.Entity<GenEmpUID>().Property(p => p.GeneratedID).UseIdentityColumn(1001, 1);
             builder.Entity<GenEmpUID>().Property(p => p.RowVersion).IsRowVersion();
             builder.Entity<GenEmpUID>().Property(p => p.IsActive).HasDefaultValue(0);
             builder.Entity<Employee>().Property(p => p.RowVersion).IsRowVersion();
             builder.Entity<RAWSMARTCARD>().Property(p => p.RowVersion).IsRowVersion();
             builder.Entity<TransportCard>().Property(p => p.RowVersion).IsRowVersion();
-
             builder.Entity<TrainStation>().Property(p => p.RowVersion).IsRowVersion();
             builder.Entity<TrainStation>().Property(b => b.TrainStationID).ValueGeneratedOnAdd();
-
             builder.Entity<CardTransaction>().Property(p => p.RowVersion).IsRowVersion();
             builder.Entity<TransportCardTrip>().Property(p => p.RowVersion).IsRowVersion();
 
@@ -55,6 +52,38 @@ namespace Common.DataAccess
             builder.Entity<RAWSMARTCARD>()
                   .HasMany(c => c.TransportCards)
                   .WithOne(e => e.RAWSMARTCARD);
+
+            builder.Entity<ApplicationRole>().HasData(new ApplicationRole
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name = "Administrator",
+                NormalizedName = "ADMINISTRATOR",
+                RoleLevel = 100,
+            });
+
+            builder.Entity<ApplicationRole>().HasData(new ApplicationRole
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name = "Manager",
+                NormalizedName = "MANAGER",
+                RoleLevel = 200,
+            });
+
+            builder.Entity<ApplicationRole>().HasData(new ApplicationRole
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name = "Clerk",
+                NormalizedName = "CLERK",
+                RoleLevel = 300,
+            });
+
+            builder.Entity<ApplicationRole>().HasData(new ApplicationRole
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name = "User",
+                NormalizedName = "USER",
+                RoleLevel = 400,
+            });
 
             builder.Entity<TrainStation>().HasData(new TrainStation
             {
@@ -156,24 +185,25 @@ namespace Common.DataAccess
                 UpdatedBy = "ADMIN"
             });
 
-            builder.ApplyConfiguration(new ApplicationUserEntityConfiguration());
+
         }
+
+
+        //private void SeedRolesSQL(MigrationBuilder migrationBuilder)
+        //{
+        //    migrationBuilder.Sql(@$"INSERT INTO [dbo].[AspNetRoles] ([Id],[Name],[NormalizedName],[ConcurrencyStamp])
+        //    VALUES ('{AdminRoleId}', 'Administrator', 'ADMINISTRATOR', null);");
+        //    migrationBuilder.Sql(@$"INSERT INTO [dbo].[AspNetRoles] ([Id],[Name],[NormalizedName],[ConcurrencyStamp])
+        //    VALUES ('{ManagerRoleId}', 'Manager', 'MANAGER', null);");
+        //    migrationBuilder.Sql(@$"INSERT INTO [dbo].[AspNetRoles] ([Id],[Name],[NormalizedName],[ConcurrencyStamp])
+        //    VALUES ('{ClerkRoleId}', 'Clerk', 'CLERK', null);");
+        //    migrationBuilder.Sql(@$"INSERT INTO [dbo].[AspNetRoles] ([Id],[Name],[NormalizedName],[ConcurrencyStamp])
+        //    VALUES ('{UserRoleId}', 'User', 'USER', null);");
+        //}
     }
+
+
 }
-
-
-public class ApplicationUserEntityConfiguration : IEntityTypeConfiguration<ApplicationUser>
-{
-    public void Configure(EntityTypeBuilder<ApplicationUser> builder)
-    {
-        builder.Property(u => u.UserUID).HasMaxLength(150);
-        builder.Property(u => u.BranchCode).HasMaxLength(100);
-    }
-}
-
-
-
-
 
 
 

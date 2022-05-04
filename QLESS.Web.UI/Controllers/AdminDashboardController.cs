@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace QLESS.Web.UI.Controllers
 {
-    [Authorize]
+     [Authorize]
     public class AdminDashboardController : Controller
     {
         public IActionResult Index()

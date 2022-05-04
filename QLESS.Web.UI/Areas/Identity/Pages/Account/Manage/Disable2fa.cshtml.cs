@@ -4,7 +4,7 @@
 
 using System;
 using System.Threading.Tasks;
-using Common.DataAccess;
+using Common;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;

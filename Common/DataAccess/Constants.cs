@@ -1,4 +1,4 @@
-﻿namespace Common.DataAccess
+﻿namespace Common
 {
     public static class Constants
     {

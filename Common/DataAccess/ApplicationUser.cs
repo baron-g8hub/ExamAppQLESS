@@ -2,7 +2,7 @@
 
 using Microsoft.AspNetCore.Identity;
 
-namespace Common.DataAccess
+namespace Common
 {
     public class ApplicationUser : IdentityUser
     {
@@ -13,8 +13,3 @@ namespace Common.DataAccess
 }
 
 
-
-public class ApplicationRole : IdentityRole
-{
-
-}

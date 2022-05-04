@@ -1,6 +1,4 @@
-﻿using Common.DataAccess;
-
-namespace Common.Contracts
+﻿namespace Common.Contracts
 {
     public interface IUserRepository : IRepositoryBase<ApplicationUser>
     {
