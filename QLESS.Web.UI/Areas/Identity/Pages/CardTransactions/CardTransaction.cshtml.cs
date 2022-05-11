@@ -85,6 +85,23 @@ namespace QLESS.Web.UI
             CancellationToken ct = _cts.Token;
             if (ModelState.IsValid)
             {
+                if (Input.AmountTotal < 100)
+                {
+                    if (Input.AmountTotal != null)
+                    {
+                        ModelState.AddModelError(string.Empty, "Minimum load of 100.");
+                        return Page();
+                    }
+                }
+                if (Input.AmountReceived < Input.AmountTotal)
+                {
+                    if (Input.AmountTotal != null)
+                    {
+                        ModelState.AddModelError(string.Empty, "Enter valid amount.");
+                        return Page();
+                    }
+                }
+
                 var transaction = new CardTransaction();
                 // Get 1 smart Card
                 var cards = await _context.RAWSMARTCARDs.ToListAsync();

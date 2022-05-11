@@ -214,6 +214,46 @@ namespace Common
                 IsActive = false,
                 IsValid = true,
             });
+            builder.Entity<RAWSMARTCARD>().HasData(new RAWSMARTCARD
+            {
+                SmartCardID = 6,
+                SmartCardName = "RFID666",
+                SerialNumber = 666,
+                IsActive = false,
+                IsValid = true,
+            });
+            builder.Entity<RAWSMARTCARD>().HasData(new RAWSMARTCARD
+            {
+                SmartCardID = 7,
+                SmartCardName = "RFID777",
+                SerialNumber = 777,
+                IsActive = false,
+                IsValid = true,
+            });
+            builder.Entity<RAWSMARTCARD>().HasData(new RAWSMARTCARD
+            {
+                SmartCardID = 8,
+                SmartCardName = "RFID888",
+                SerialNumber = 888,
+                IsActive = false,
+                IsValid = true,
+            });
+            builder.Entity<RAWSMARTCARD>().HasData(new RAWSMARTCARD
+            {
+                SmartCardID = 9,
+                SmartCardName = "RFID999",
+                SerialNumber = 999,
+                IsActive = false,
+                IsValid = true,
+            });
+            builder.Entity<RAWSMARTCARD>().HasData(new RAWSMARTCARD
+            {
+                SmartCardID = 10,
+                SmartCardName = "RFID1010",
+                SerialNumber = 1010,
+                IsActive = false,
+                IsValid = true,
+            });
         }
     }
 }

@@ -113,24 +113,17 @@ namespace QLESS.Web.UI
             if (ModelState.IsValid)
             {
                 var transaction = new CardTransaction();
-                // Get 1 smart Card
-                var cards = await _context.RAWSMARTCARDs.ToListAsync();
-                // Add Insert into TransportCards ledger and Add Cash Value
+                // Get existing smart Card
+                var cards = await _context.TransportCards.ToListAsync();
+                // Update TransportCards ledger and Add Cash Value
                 var transportCard = new TransportCard();
                 if (cards != null)
                 {
-                    var smartCard = cards.FirstOrDefault(x => x.SmartCardID == Input.CardNumber);
-                    if (smartCard != null)
+                    transportCard = cards.FirstOrDefault(x => x.TransportCardID == Input.CardNumber);
+                    if (transportCard != null)
                     {
                         transportCard.LastUsedDate = DateTime.UtcNow;
-                        transportCard.RAWSMARTCARD = smartCard;
-                        transportCard.IsPWDCard = false;
-                        transportCard.IsSeniorCard = false;
                         transportCard.LoadBalance += Input.AmountTotal;
-                        transportCard.IsActive = true;
-                        transportCard.SCCNumber = string.Empty;
-                        transportCard.PWDNumber = string.Empty;
-                        // Insert into TransportCards table
                         _context.TransportCards.Update(transportCard);
                         var change = Input.AmountTotal - Input.AmountReceived;
                         transaction = new CardTransaction
@@ -145,8 +138,6 @@ namespace QLESS.Web.UI
                         };
 
                         await _context.CardTransactions.AddAsync(transaction);
-                        smartCard.IsActive = true;
-                        _context.RAWSMARTCARDs.Update(smartCard);
                         // TODO: To use context transactional approach here.
                         IDbContextTransaction? trans = null;
                         try

@@ -14,6 +14,11 @@
             <a class="btn btn-sm btn-outline-primary asp-controller="TransportCards" asp-action="AddTrip" asp-route-id="@Model.Entity.TransportCardID">ADD TRIP SAME DAY</a>
         </form>
     </li>
+     <li class="list-group-item">
+        <form asp-route-id="@Model.Entity.TransportCardID" method="post">
+            <a class="btn btn-sm btn-outline-primary asp-controller="TransportCards" asp-action="AddTrip" asp-route-id="@Model.Entity.TransportCardID">ADD TRIP 5yrs. + </a>
+        </form>
+    </li>
 </ul>
 <hr />
 
