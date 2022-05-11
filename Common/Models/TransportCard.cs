@@ -14,6 +14,7 @@ namespace Common.Models
         [StringLength(150)]
         public string? CardHolder { get; set; }
 
+        [DataType(DataType.Currency)]
         [Column(TypeName = "smallmoney")]
         public decimal? LoadBalance { get; set; }
 

@@ -1,0 +1,54 @@
+﻿@page
+@model DiscountCardTransactionModel
+@{
+    ViewData["Title"] = "Card Transaction";
+}
+
+
+
+<div class="container overflow-hidden  p-3">
+    <div class="row">
+        <div class="col ">
+            <div class="col-12 p-3 border border-2 panel_border border-secondary">
+                <h4 class="text-center mb-3">Q-LESS Transport Card</h4>
+                <hr />
+                <div class="container px-4 mb-3">
+                    <div class="row gx-5">
+                        <div class="col">
+                            <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="form-floating">
+                                    <label asp-for="Input.AmountTotal"></label>
+                                </div>
+                                <div class="form-floating">
+                                    <input asp-for="Input.AmountReceived" class="form-control form-control-lg" autocomplete="amountreceived" aria-required="true" />
+                                    <label asp-for="Input.AmountReceived"></label>
+                                    <span asp-validation-for="Input.AmountReceived" class="text-danger"></span>
+                                </div>
+
+
+                                <button id="registerSubmit" type="submit" class="w-100 btn btn-lg button_theme_orange">OK</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+</div>
+
+
+
+
+
+
+<div class="row g-3">
+</div>
+
+
+
+
+@section Scripts {
+<partial name="_ValidationScriptsPartial" />
+}

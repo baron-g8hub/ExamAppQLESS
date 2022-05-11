@@ -1,7 +1,7 @@
 ﻿@page
-@model CardTransactionModel
+@model AddValueCardTransactionModel
 @{
-    ViewData["Title"] = "Card Transaction";
+    ViewData["Title"] = "Add Card Value Transaction";
 }
 
 
@@ -18,6 +18,14 @@
                             <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                 <div class="container px-4 mb-3">
+                                    <div class="row gx-5">
+                                        <div class="col mb-3">
+                                            <div class="form-floating">
+                                                <select asp-for="Input.CardNumber" class="form-control" asp-items="@Model.RAWSMARTCARDList"></select>
+                                                <label asp-for="Input.CardName"></label>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="row gx-5">
                                         <div class="col">
                                             <div class="form-floating">
@@ -39,7 +47,7 @@
                                                 <span asp-validation-for="Input.AmountReceived" class="text-danger"></span>
                                             </div>
                                         </div>
-                                          <div class="col">
+                                        <div class="col">
                                             <div class="form-floating">
                                                 <label asp-for="Input.AmountChange"></label>
                                             </div>

@@ -9,11 +9,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace QLESS.Web.UI
 {
-    public class CardTransactionModel : PageModel
+    public class DiscountCardTransactionModel : PageModel
     {
         public ApplicationDbContext _context;
         private CancellationTokenSource? _cts = null;
-        public CardTransactionModel(ApplicationDbContext context)
+        public DiscountCardTransactionModel(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -85,7 +85,6 @@ namespace QLESS.Web.UI
             CancellationToken ct = _cts.Token;
             if (ModelState.IsValid)
             {
-                var transaction = new CardTransaction();
                 // Get 1 smart Card
                 var cards = await _context.RAWSMARTCARDs.ToListAsync();
                 // Add Insert into TransportCards ledger and Add Cash Value
@@ -99,22 +98,22 @@ namespace QLESS.Web.UI
                         transportCard.RAWSMARTCARD = smartCard;
                         transportCard.IsPWDCard = false;
                         transportCard.IsSeniorCard = false;
-                        transportCard.LoadBalance = Input.AmountTotal;
+                        transportCard.LoadBalance = Input.AmountReceived;
                         transportCard.IsActive = true;
                         transportCard.SCCNumber = string.Empty;
                         transportCard.PWDNumber = string.Empty;
                         // Insert into TransportCards table
                         await _context.TransportCards.AddAsync(transportCard);
-                        var change = Input.AmountTotal - Input.AmountReceived;
-                        transaction = new CardTransaction
+                        var change =  Input.AmountTotal - Input.AmountReceived;
+                        var transaction = new CardTransaction
                         {
                             TransportCard = transportCard,
                             PostingDate = DateTime.Now,
-                            AmountTotal = Input.AmountTotal,
-                            AmountReceived = Input.AmountReceived,
+                            AmountTotal = Input.AmountReceived,
+                            AmountReceived = Input.AmountReceived,  
                             DiscountPercentage = 0,
                             AmountDiscounted = 0,
-                            AmountChange = change,
+                            AmountChange = change,    
                         };
 
                         await _context.CardTransactions.AddAsync(transaction);
@@ -153,10 +152,17 @@ namespace QLESS.Web.UI
                         }
                     }
                 }
-                Input.AmountTotal = transaction.AmountTotal;
-                Input.AmountReceived = transaction.AmountReceived;
-                Input.AmountChange = transaction.AmountChange;
-                return LocalRedirect(returnUrl);
+                //var result = await _userManager.CreateAsync(user, Input.Password);
+                //if (result != null)
+                //{
+                //}
+                //else
+                //{
+                //    foreach (var error in result.Errors)
+                //    {
+                //        ModelState.AddModelError(string.Empty, error.Description);
+                //    }
+                //}
             }
             // If we got this far, something failed, redisplay form
             return Page();
@@ -164,6 +170,7 @@ namespace QLESS.Web.UI
 
         public async Task<int> CreateCardTransactionAsync(CancellationToken ct)
         {
+            int records = 0;
             IDbContextTransaction? transaction = null;
             //await Task.Delay(5000);
             if (ct.IsCancellationRequested)
@@ -174,7 +181,7 @@ namespace QLESS.Web.UI
             {
                 using (transaction = await _context.Database.BeginTransactionAsync())
                 {
-                    int records = await _context.SaveChangesAsync();
+                    records = await _context.SaveChangesAsync();
                     await transaction.CommitAsync();
                     return records;
                 }

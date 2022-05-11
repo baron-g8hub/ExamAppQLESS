@@ -19,6 +19,7 @@ namespace Common.Models
         [Column(TypeName = "datetime")]
         public DateTime PostingDate { get; set; }
 
+        [DataType(DataType.Currency)]
         [Column(TypeName = "smallmoney")]
         public decimal? AmountTotal { get; set; }
 

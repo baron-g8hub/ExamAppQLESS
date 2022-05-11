@@ -2,23 +2,24 @@ using Common;
 using Common.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace QLESS.Web.UI
 {
-    public class CardTransactionModel : PageModel
+    public class AddValueCardTransactionModel : PageModel
     {
         public ApplicationDbContext _context;
         private CancellationTokenSource? _cts = null;
-        public CardTransactionModel(ApplicationDbContext context)
+        public AddValueCardTransactionModel(ApplicationDbContext context)
         {
             _context = context;
+            RAWSMARTCARDList = new List<SelectListItem> { new SelectListItem { Value = "0", Text = "- select card -", Selected = true } };
         }
-
-
 
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -39,13 +40,15 @@ namespace QLESS.Web.UI
         /// </summary>
         public class InputModel
         {
-
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Display(Name = "CardNumber")]
+
             public int CardNumber { get; set; }
+
+            [Display(Name = "CardName")]
+            public string? CardName { get; set; }
 
             [Display(Name = "AmountTotal")]
             public decimal? AmountTotal { get; set; }
@@ -60,16 +63,40 @@ namespace QLESS.Web.UI
             [Display(Name = "AmountDiscounted")]
             public decimal? AmountDiscounted { get; set; }
 
-
             [Display(Name = "AmountChange")]
             public decimal? AmountChange { get; set; }
 
+            [DataType(DataType.Currency)]
+            [Column(TypeName = "decimal(18, 2)")]
+            public decimal? Balance { get; set; }
         }
+        public List<SelectListItem> RAWSMARTCARDList { get; set; }
+
 
 
         public async Task OnGetAsync(string? returnUrl = null)
         {
-            var cards = await _context.RAWSMARTCARDs.ToListAsync();
+            var transactions = await _context.CardTransactions.ToListAsync();
+            var transportCards = await _context.TransportCards.ToListAsync();
+            if (transportCards != null)
+            {
+                var rAWSMARTCARDs = await _context.RAWSMARTCARDs.ToListAsync();
+                var list = new List<TransportCard>();
+                if (transportCards.Count > 0)
+                {
+                    list = (from a in transportCards join b in rAWSMARTCARDs on a.RAWSMARTCARD.SmartCardID equals b.SmartCardID select a).ToList();
+                    foreach (var item in list)
+                    {
+                        var total = transactions.FindAll(x => x.TransportCard?.TransportCardID == item.TransportCardID).Sum(x => x.AmountTotal);
+                        if (total > 0)
+                        {
+                            item.LoadBalance = decimal.Parse(total.Value.ToString("0.##"));
+                        }
+                    }
+                }
+                RAWSMARTCARDList.AddRange(collection: list.Select(x =>
+                new SelectListItem { Value = x.TransportCardID.ToString(), Text = (x.RAWSMARTCARD.SmartCardName + " | LOAD: " + x.LoadBalance) }).ToList());
+            }
             ReturnUrl = returnUrl;
         }
 
@@ -92,19 +119,19 @@ namespace QLESS.Web.UI
                 var transportCard = new TransportCard();
                 if (cards != null)
                 {
-                    var smartCard = cards.FirstOrDefault(x => x.IsActive == false);
+                    var smartCard = cards.FirstOrDefault(x => x.SmartCardID == Input.CardNumber);
                     if (smartCard != null)
                     {
                         transportCard.LastUsedDate = DateTime.UtcNow;
                         transportCard.RAWSMARTCARD = smartCard;
                         transportCard.IsPWDCard = false;
                         transportCard.IsSeniorCard = false;
-                        transportCard.LoadBalance = Input.AmountTotal;
+                        transportCard.LoadBalance += Input.AmountTotal;
                         transportCard.IsActive = true;
                         transportCard.SCCNumber = string.Empty;
                         transportCard.PWDNumber = string.Empty;
                         // Insert into TransportCards table
-                        await _context.TransportCards.AddAsync(transportCard);
+                        _context.TransportCards.Update(transportCard);
                         var change = Input.AmountTotal - Input.AmountReceived;
                         transaction = new CardTransaction
                         {
@@ -124,12 +151,6 @@ namespace QLESS.Web.UI
                         IDbContextTransaction? trans = null;
                         try
                         {
-
-                            //var result = await CreateCardTransactionAsync(ct);
-                            //if (result > 0)
-                            //{
-                            //    return LocalRedirect(returnUrl);
-                            //}
                             using (trans = await _context.Database.BeginTransactionAsync())
                             {
                                 await _context.SaveChangesAsync();
@@ -162,58 +183,6 @@ namespace QLESS.Web.UI
             return Page();
         }
 
-        public async Task<int> CreateCardTransactionAsync(CancellationToken ct)
-        {
-            IDbContextTransaction? transaction = null;
-            //await Task.Delay(5000);
-            if (ct.IsCancellationRequested)
-            {
-                ct.ThrowIfCancellationRequested();
-            }
-            try
-            {
-                using (transaction = await _context.Database.BeginTransactionAsync())
-                {
-                    int records = await _context.SaveChangesAsync();
-                    await transaction.CommitAsync();
-                    return records;
-                }
-            }
-            catch (DbUpdateConcurrencyException ex)
-            {
-                foreach (var entry in ex.Entries)
-                {
-                    if (entry.Entity is RAWSMARTCARD)
-                    {
-                        var proposedValues = entry.CurrentValues;
-                        var databaseValues = entry.GetDatabaseValues();
 
-                        foreach (var property in proposedValues.Properties)
-                        {
-                            var proposedValue = proposedValues[property];
-                            var databaseValue = databaseValues?[property];
-                        }
-
-                        // Refresh original values to bypass next concurrency check
-                        if (databaseValues != null)
-                        {
-                            entry.OriginalValues.SetValues(databaseValues);
-                        }
-                    }
-                    else
-                    {
-                        throw new NotSupportedException("Unable to save changes. The Entity details was updated by another user. " + entry.Metadata.Name);
-                    }
-                }
-                throw ex;
-            }
-            catch (DbUpdateException ex)
-            {
-                SqlException? s = ex.InnerException as SqlException;
-                //var errorMessage = $"{ex.Message}" + " {ex?.InnerException.Message}" + " rolling back…";
-                transaction?.RollbackAsync();
-                throw s!;
-            }
-        }
     }
 }

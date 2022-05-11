@@ -49,41 +49,9 @@ namespace Common
                   .WithOne(i => i.GenEmpUID)
                   .HasForeignKey<Employee>(b => b.EmployeeUID);
 
-            builder.Entity<RAWSMARTCARD>()
-                  .HasMany(c => c.TransportCards)
-                  .WithOne(e => e.RAWSMARTCARD);
-
-            builder.Entity<ApplicationRole>().HasData(new ApplicationRole
-            {
-                Id = Guid.NewGuid().ToString(),
-                Name = "Administrator",
-                NormalizedName = "ADMINISTRATOR",
-                RoleLevel = 100,
-            });
-
-            builder.Entity<ApplicationRole>().HasData(new ApplicationRole
-            {
-                Id = Guid.NewGuid().ToString(),
-                Name = "Manager",
-                NormalizedName = "MANAGER",
-                RoleLevel = 200,
-            });
-
-            builder.Entity<ApplicationRole>().HasData(new ApplicationRole
-            {
-                Id = Guid.NewGuid().ToString(),
-                Name = "Clerk",
-                NormalizedName = "CLERK",
-                RoleLevel = 300,
-            });
-
-            builder.Entity<ApplicationRole>().HasData(new ApplicationRole
-            {
-                Id = Guid.NewGuid().ToString(),
-                Name = "User",
-                NormalizedName = "USER",
-                RoleLevel = 400,
-            });
+            //builder.Entity<RAWSMARTCARD>()
+            //     .HasMany(c => c.TransportCards)
+            //     .WithOne(e => e.RAWSMARTCARD);
 
             builder.Entity<TrainStation>().HasData(new TrainStation
             {
@@ -104,7 +72,6 @@ namespace Common
                 CreatedBy = "ADMIN",
                 UpdatedBy = "ADMIN"
             });
-
             builder.Entity<TrainStation>().HasData(new TrainStation
             {
                 TrainStationID = Guid.NewGuid(),
@@ -114,7 +81,6 @@ namespace Common
                 CreatedBy = "ADMIN",
                 UpdatedBy = "ADMIN"
             });
-
             builder.Entity<TrainStation>().HasData(new TrainStation
             {
                 TrainStationID = Guid.NewGuid(),
@@ -124,7 +90,6 @@ namespace Common
                 CreatedBy = "ADMIN",
                 UpdatedBy = "ADMIN"
             });
-
             builder.Entity<TrainStation>().HasData(new TrainStation
             {
                 TrainStationID = Guid.NewGuid(),
@@ -134,7 +99,6 @@ namespace Common
                 CreatedBy = "ADMIN",
                 UpdatedBy = "ADMIN"
             });
-
             builder.Entity<TrainStation>().HasData(new TrainStation
             {
                 TrainStationID = Guid.NewGuid(),
@@ -144,7 +108,6 @@ namespace Common
                 CreatedBy = "ADMIN",
                 UpdatedBy = "ADMIN"
             });
-
             builder.Entity<TrainStation>().HasData(new TrainStation
             {
                 TrainStationID = Guid.NewGuid(),
@@ -154,7 +117,6 @@ namespace Common
                 CreatedBy = "ADMIN",
                 UpdatedBy = "ADMIN"
             });
-
             builder.Entity<TrainStation>().HasData(new TrainStation
             {
                 TrainStationID = Guid.NewGuid(),
@@ -164,7 +126,6 @@ namespace Common
                 CreatedBy = "ADMIN",
                 UpdatedBy = "ADMIN"
             });
-
             builder.Entity<TrainStation>().HasData(new TrainStation
             {
                 TrainStationID = Guid.NewGuid(),
@@ -174,7 +135,6 @@ namespace Common
                 CreatedBy = "ADMIN",
                 UpdatedBy = "ADMIN"
             });
-
             builder.Entity<TrainStation>().HasData(new TrainStation
             {
                 TrainStationID = Guid.NewGuid(),
@@ -185,25 +145,79 @@ namespace Common
                 UpdatedBy = "ADMIN"
             });
 
+            builder.Entity<ApplicationRole>().HasData(new ApplicationRole
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name = "Administrator",
+                NormalizedName = "ADMINISTRATOR",
+                RoleLevel = 100,
+            });
+            builder.Entity<ApplicationRole>().HasData(new ApplicationRole
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name = "Manager",
+                NormalizedName = "MANAGER",
+                RoleLevel = 200,
+            });
+            builder.Entity<ApplicationRole>().HasData(new ApplicationRole
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name = "Clerk",
+                NormalizedName = "CLERK",
+                RoleLevel = 300,
+            });
+            builder.Entity<ApplicationRole>().HasData(new ApplicationRole
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name = "User",
+                NormalizedName = "USER",
+                RoleLevel = 400,
+            });
 
+            builder.Entity<RAWSMARTCARD>().HasData(new RAWSMARTCARD
+            {
+                SmartCardID = 1,
+                SmartCardName = "RFID111",
+                SerialNumber = 111,
+                IsActive = false,
+                IsValid = true,
+            });
+            builder.Entity<RAWSMARTCARD>().HasData(new RAWSMARTCARD
+            {
+                SmartCardID = 2,
+                SmartCardName = "RFID222",
+                SerialNumber = 222,
+                IsActive = false,
+                IsValid = true,
+            });
+            builder.Entity<RAWSMARTCARD>().HasData(new RAWSMARTCARD
+            {
+                SmartCardID = 3,
+                SmartCardName = "RFID333",
+                SerialNumber = 333,
+                IsActive = false,
+                IsValid = true,
+            });
+            builder.Entity<RAWSMARTCARD>().HasData(new RAWSMARTCARD
+            {
+                SmartCardID = 4,
+                SmartCardName = "RFID444",
+                SerialNumber = 444,
+                IsActive = false,
+                IsValid = true,
+            });
+            builder.Entity<RAWSMARTCARD>().HasData(new RAWSMARTCARD
+            {
+                SmartCardID = 5,
+                SmartCardName = "RFID555",
+                SerialNumber = 555,
+                IsActive = false,
+                IsValid = true,
+            });
         }
-
-
-        //private void SeedRolesSQL(MigrationBuilder migrationBuilder)
-        //{
-        //    migrationBuilder.Sql(@$"INSERT INTO [dbo].[AspNetRoles] ([Id],[Name],[NormalizedName],[ConcurrencyStamp])
-        //    VALUES ('{AdminRoleId}', 'Administrator', 'ADMINISTRATOR', null);");
-        //    migrationBuilder.Sql(@$"INSERT INTO [dbo].[AspNetRoles] ([Id],[Name],[NormalizedName],[ConcurrencyStamp])
-        //    VALUES ('{ManagerRoleId}', 'Manager', 'MANAGER', null);");
-        //    migrationBuilder.Sql(@$"INSERT INTO [dbo].[AspNetRoles] ([Id],[Name],[NormalizedName],[ConcurrencyStamp])
-        //    VALUES ('{ClerkRoleId}', 'Clerk', 'CLERK', null);");
-        //    migrationBuilder.Sql(@$"INSERT INTO [dbo].[AspNetRoles] ([Id],[Name],[NormalizedName],[ConcurrencyStamp])
-        //    VALUES ('{UserRoleId}', 'User', 'USER', null);");
-        //}
     }
-
-
 }
+
 
 
 
